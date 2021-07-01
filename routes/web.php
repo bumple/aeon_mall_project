@@ -1,8 +1,13 @@
 <?php
 
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\ProductController;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Image;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,8 +27,10 @@ Route::get('/', function () {
 
 Route::prefix('admin')->group(function (){
     Route::resources([
-        'images' => Image::class,
-        'categories' => Category::class,
-        'brands' => Brand::class
+        'images' => ImageController::class,
+        'categories' => CategoryController::class,
+        'brands' => BrandController::class,
+        'products' => ProductController::class
     ]);
 });
+

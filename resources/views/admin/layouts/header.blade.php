@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>GURU Able - Free Lite Admin Template </title>
+    <title>@yield('title')</title>
     <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -12,9 +12,10 @@
     <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="description" content="CodedThemes">
-    <meta name="keywords" content=" Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
+    <meta name="keywords"
+          content=" Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
     <meta name="author" content="CodedThemes">
     <!-- Favicon icon -->
     <link rel="icon" href="{{asset('backend/admin/assets/images/favicon.ico')}}" type="image/x-icon">
@@ -23,7 +24,8 @@
     <!-- Required Fremwork -->
     <link rel="stylesheet" type="text/css" href="{{asset('backend/admin/assets/css/bootstrap/css/bootstrap.min.css')}}">
     <!-- themify-icons line icon -->
-    <link rel="stylesheet" type="text/css" href="{{asset('backend/admin/assets/icon/themify-icons/themify-icons.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{asset('backend/admin/assets/icon/themify-icons/themify-icons.css')}}">
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="{{asset('backend/admin/assets/icon/icofont/css/icofont.css')}}">
     <!-- Style.css -->
@@ -86,7 +88,8 @@
                         <i class="ti-search"></i>
                     </a>
                     <a href="index.html">
-                        <img class="img-fluid" src="{{asset('backend/admin/assets/images/logo.png')}}" alt="Theme-Logo" />
+                        <img class="img-fluid" src="{{asset('backend/admin/assets/images/logo.png')}}"
+                             alt="Theme-Logo"/>
                     </a>
                     <a class="mobile-options">
                         <i class="ti-more"></i>
@@ -118,30 +121,39 @@
                                 </li>
                                 <li>
                                     <div class="media">
-                                        <img class="d-flex align-self-center img-radius" src="{{asset('backend/admin/assets/images/avatar-4.jpg')}}" alt="Generic placeholder image">
+                                        <img class="d-flex align-self-center img-radius"
+                                             src="{{asset('backend/admin/assets/images/avatar-4.jpg')}}"
+                                             alt="Generic placeholder image">
                                         <div class="media-body">
                                             <h5 class="notification-user">John Doe</h5>
-                                            <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                            <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer
+                                                elit.</p>
                                             <span class="notification-time">30 minutes ago</span>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="media">
-                                        <img class="d-flex align-self-center img-radius" src="{{asset('backend/admin/assets/images/avatar-3.jpg')}}" alt="Generic placeholder image">
+                                        <img class="d-flex align-self-center img-radius"
+                                             src="{{asset('backend/admin/assets/images/avatar-3.jpg')}}"
+                                             alt="Generic placeholder image">
                                         <div class="media-body">
                                             <h5 class="notification-user">Joseph William</h5>
-                                            <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                            <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer
+                                                elit.</p>
                                             <span class="notification-time">30 minutes ago</span>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="media">
-                                        <img class="d-flex align-self-center img-radius" src="{{asset('backend/admin/assets/images/avatar-4.jpg')}}" alt="Generic placeholder image">
+                                        <img class="d-flex align-self-center img-radius"
+                                             src="{{asset('backend/admin/assets/images/avatar-4.jpg')}}"
+                                             alt="Generic placeholder image">
                                         <div class="media-body">
                                             <h5 class="notification-user">Sara Soudein</h5>
-                                            <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                                            <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer
+                                                elit.</p>
                                             <span class="notification-time">30 minutes ago</span>
                                         </div>
                                     </div>
@@ -150,7 +162,8 @@
                         </li>
                         <li class="user-profile header-notification">
                             <a href="#!">
-                                <img src="{{asset('backend/admin/assets/images/avatar-4.jpg')}}" class="img-radius" alt="User-Profile-Image">
+                                <img src="{{asset('backend/admin/assets/images/avatar-4.jpg')}}" class="img-radius"
+                                     alt="User-Profile-Image">
                                 <span>John Doe</span>
                                 <i class="ti-angle-down"></i>
                             </a>
@@ -193,7 +206,9 @@
                     <div class="pcoded-inner-navbar main-menu">
                         <div class="">
                             <div class="main-menu-header">
-                                <img class="img-40 img-radius" src="{{asset('backend/admin/assets/images/avatar-4.jpg')}}" alt="User-Profile-Image">
+                                <img class="img-40 img-radius"
+                                     src="{{asset('backend/admin/assets/images/avatar-4.jpg')}}"
+                                     alt="User-Profile-Image">
                                 <div class="user-details">
                                     <span>John Doe</span>
                                     <span id="more-details">UX Designer<i class="ti-angle-down"></i></span>
@@ -229,14 +244,15 @@
                             <li class="pcoded-hasmenu">
                                 <a href="javascript:void(0)">
                                     <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                                    <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Components</span>
+                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Components</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                                 <ul class="pcoded-submenu">
                                     <li class=" ">
                                         <a href="#">
                                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Accordion</span>
+                                            <span class="pcoded-mtext"
+                                                  data-i18n="nav.basic-components.alert">Accordion</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
@@ -250,21 +266,24 @@
                                     <li class=" ">
                                         <a href="#">
                                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Button</span>
+                                            <span class="pcoded-mtext"
+                                                  data-i18n="nav.basic-components.alert">Button</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
                                     <li class=" ">
                                         <a href="#">
                                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Tabs</span>
+                                            <span class="pcoded-mtext"
+                                                  data-i18n="nav.basic-components.breadcrumbs">Tabs</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
                                     <li class=" ">
                                         <a href="#">
                                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Color</span>
+                                            <span class="pcoded-mtext"
+                                                  data-i18n="nav.basic-components.alert">Color</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
@@ -278,7 +297,8 @@
                                     <li class=" ">
                                         <a href="#">
                                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Tooltip</span>
+                                            <span class="pcoded-mtext"
+                                                  data-i18n="nav.basic-components.alert">Tooltip</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
@@ -299,7 +319,8 @@
                                     <li class=" ">
                                         <a href="icon-themify.html">
                                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Icon</span>
+                                            <span class="pcoded-mtext"
+                                                  data-i18n="nav.basic-components.breadcrumbs">Icon</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
@@ -312,7 +333,8 @@
                             <li>
                                 <a href="form-elements-component.html">
                                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Form Components</span>
+                                    <span class="pcoded-mtext"
+                                          data-i18n="nav.form-components.main">Form Components</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
@@ -345,14 +367,15 @@
                             <li class="pcoded-hasmenu">
                                 <a href="javascript:void(0)">
                                     <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                                    <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Pages</span>
+                                    <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Pages</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                                 <ul class="pcoded-submenu">
                                     <li class=" ">
                                         <a href="auth-normal-sign-in.html">
                                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Login</span>
+                                            <span class="pcoded-mtext"
+                                                  data-i18n="nav.basic-components.alert">Login</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
@@ -401,7 +424,8 @@
                                             <li class="">
                                                 <a href="javascript:void(0)">
                                                     <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                    <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.menu-level-31">Menu Level 3.1</span>
+                                                    <span class="pcoded-mtext"
+                                                          data-i18n="nav.menu-levels.menu-level-22.menu-level-31">Menu Level 3.1</span>
                                                     <span class="pcoded-mcaret"></span>
                                                 </a>
                                             </li>
@@ -432,13 +456,8 @@
                                             <div class="card widget-card-1">
                                                 <div class="card-block-small">
                                                     <i class="icofont icofont-pie-chart bg-c-blue card1-icon"></i>
-                                                    <span class="text-c-blue f-w-600">Use space</span>
-                                                    <h4>49/50GB</h4>
-                                                    <div>
-                                                            <span class="f-left m-t-10 text-muted">
-                                                                <i class="text-c-blue f-16 icofont icofont-warning m-r-10"></i>Get more space
-                                                            </span>
-                                                    </div>
+                                                    <span class="text-c-blue f-w-600">Product</span>
+                                                    <a href="{{ route('products.index') }}"><h4>Manager</h4></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -448,13 +467,8 @@
                                             <div class="card widget-card-1">
                                                 <div class="card-block-small">
                                                     <i class="icofont icofont-ui-home bg-c-pink card1-icon"></i>
-                                                    <span class="text-c-pink f-w-600">Revenue</span>
-                                                    <h4>$23,589</h4>
-                                                    <div>
-                                                            <span class="f-left m-t-10 text-muted">
-                                                                <i class="text-c-pink f-16 icofont icofont-calendar m-r-10"></i>Last 24 hours
-                                                            </span>
-                                                    </div>
+                                                    <span class="text-c-pink f-w-600">Customer</span>
+                                                    <a href=""><h4>23</h4></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -464,13 +478,8 @@
                                             <div class="card widget-card-1">
                                                 <div class="card-block-small">
                                                     <i class="icofont icofont-warning-alt bg-c-green card1-icon"></i>
-                                                    <span class="text-c-green f-w-600">Fixed issue</span>
-                                                    <h4>45</h4>
-                                                    <div>
-                                                            <span class="f-left m-t-10 text-muted">
-                                                                <i class="text-c-green f-16 icofont icofont-tag m-r-10"></i>Tracked via microsoft
-                                                            </span>
-                                                    </div>
+                                                    <span class="text-c-green f-w-600">Bill</span>
+                                                    <a href=""><h4>45</h4></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -480,13 +489,8 @@
                                             <div class="card widget-card-1">
                                                 <div class="card-block-small">
                                                     <i class="icofont icofont-social-twitter bg-c-yellow card1-icon"></i>
-                                                    <span class="text-c-yellow f-w-600">Followers</span>
-                                                    <h4>+562</h4>
-                                                    <div>
-                                                            <span class="f-left m-t-10 text-muted">
-                                                                <i class="text-c-yellow f-16 icofont icofont-refresh m-r-10"></i>Just update
-                                                            </span>
-                                                    </div>
+                                                    <span class="text-c-yellow f-w-600">Payment</span>
+                                                    <a href=""><h4>+562</h4></a>
                                                 </div>
                                             </div>
                                         </div>
