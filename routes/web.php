@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Image;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +17,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.layouts.master');
+});
+
+Route::prefix('admin')->group(function (){
+    Route::resources([
+        'images' => Image::class,
+        'categories' => Category::class,
+        'brands' => Brand::class
+    ]);
 });
