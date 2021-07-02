@@ -19,7 +19,7 @@ class ProductSeeder extends Seeder
             'product_name' => Str::random(10),
             'description' => Str::random(10),
             'unit_price' => rand(1,100),
-            'brand_id' => 1,
+            'brand_id' => 7,
             'category_id' => 1,
         ]);
 
@@ -27,7 +27,7 @@ class ProductSeeder extends Seeder
             'product_name' => Str::random(10),
             'description' => Str::random(10),
             'unit_price' => rand(1,100),
-            'brand_id' => 2,
+            'brand_id' => 7,
             'category_id' => 2,
         ]);
 
@@ -35,7 +35,7 @@ class ProductSeeder extends Seeder
             'product_name' => Str::random(10),
             'description' => Str::random(10),
             'unit_price' => rand(1,100),
-            'brand_id' => 1,
+            'brand_id' => 7,
             'category_id' => 1,
         ]);
 
@@ -43,7 +43,7 @@ class ProductSeeder extends Seeder
             'product_name' => Str::random(10),
             'description' => Str::random(10),
             'unit_price' => rand(1,100),
-            'brand_id' => 2,
+            'brand_id' => 7,
             'category_id' => 2,
         ]);
     }

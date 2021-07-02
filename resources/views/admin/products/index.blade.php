@@ -50,18 +50,23 @@
                                     </p>
 
                                 </td>
-                                <td>
-                                    <p class="d-inline-block m-r-20"><a
-                                            href="{{ route('brands.edit', $product->brand->id) }}">{{ $product->brand->name }}</a>
-                                    </p>
-
-                                </td>
+                                @if($product->brand->id)
+                                    <td>
+                                        <p class="d-inline-block m-r-20">
+                                            <a href="{{ route('brands.edit', $product->brand->id) }}">{{ $product->brand->name }}
+                                            </a>
+                                        </p>
+                                @else
+                                    <td>Not data</td>
+                                    </td>
+                                @endif
                                 <td>
                                     @foreach($product->images as $image)
                                         <p class="d-inline-block m-r-20">{{ $image->image }}</p>
                                         @break
                                     @endforeach
                                 </td>
+                                <td><a href="{{ route('products.show', $product->id) }}"><i class="ti-layout-grid2-alt"></i></a></td>
                             </tr>
                         @empty
                             <td>Not data</td>
@@ -83,7 +88,7 @@
     </div>
     </div>
     <div class="fixed-button">
-        <a href="{{ route('products.create') }}" target="_blank" class="btn btn-md btn-primary">
+        <a href="{{ route('products.create') }}" class="btn btn-md btn-primary">
             <i class="fa fa-shopping-cart" aria-hidden="true"></i> Create new product
         </a>
     </div>

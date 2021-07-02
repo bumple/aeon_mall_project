@@ -1,6 +1,3 @@
-
-
-
 <!-- Required Jquery -->
 <script type="text/javascript" src="{{asset('backend/admin/assets/js/jquery/jquery.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('backend/admin/assets/js/jquery-ui/jquery-ui.min.js')}}"></script>
