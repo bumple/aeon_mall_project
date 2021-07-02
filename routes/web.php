@@ -32,5 +32,6 @@ Route::prefix('admin')->group(function (){
         'brands' => BrandController::class,
         'products' => ProductController::class
     ]);
+    Route::get('products/{product}/detail', [ProductController::class, 'detail'])->name('products.detail');
 });
 

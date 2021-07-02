@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class ImageController extends Controller
@@ -65,25 +66,29 @@ class ImageController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
 //        dd($request);
         $files = [];
+        $image = new Image();
+        $image->product_id = $id;
+
         if ($request->hasFile('filenames')) {
             foreach ($request->file('filenames') as $file) {
-                $name = date('Y-m-d_h:i:s') . rand(1, 100) . '.' . $file->extension();
+                $name = rand(1, 100) . date('Y-m-d_h:i:s') . '.' . $file->extension();
                 $file->storeAs('public/uploads', $name);
                 $files[] = $name;
-
+                $image->image = $name;
+                $image->save();
             }
         }
-        dd($files);
-        $image = new Image();
+
         $image->image = $files;
-        $image->product_id = $id;
         $image->save();
+
+        return redirect()->route('products.index');
     }
 
     /**

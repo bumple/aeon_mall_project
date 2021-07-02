@@ -50,9 +50,15 @@ class ProductController extends Controller
         return view('admin.images.create', compact('product_id'));
     }
 
+    public function detail($id)
+    {
+        $product = Product::with('category', 'brand')->where('id',$id)->get();
+        return view('admin.products.detail', compact('product'));
+    }
+
     public function edit($id)
     {
-        //
+        return view('admin.products.edit');
     }
 
     public function update(Request $request, $id)
@@ -62,6 +68,10 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $product->images()->update(['product_id' => null]);
+        $product->delete();
+
+        return redirect()->route('products.index');
     }
 }

@@ -36,7 +36,7 @@
                                     <div class="task-contain">
                                         <h6 class="bg-c-blue d-inline-block text-center">{{ ++$key }}</h6>
                                         <p class="d-inline-block m-l-20"><a
-                                                href="{{ route('products.show', $product->id) }}">{{ $product->product_name }}</a>
+                                                href="{{ route('products.detail', $product->id) }}">{{ $product->product_name }}</a>
                                         </p>
                                     </div>
                                 </td>
@@ -62,7 +62,7 @@
                                 @endif
                                 <td>
                                     @foreach($product->images as $image)
-                                        <p class="d-inline-block m-r-20">{{ $image->image }}</p>
+                                        <img src="{{ asset("storage/uploads/$image->image")  }}" alt="img" width="150px">
                                         @break
                                     @endforeach
                                 </td>

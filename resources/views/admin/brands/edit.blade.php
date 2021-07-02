@@ -5,7 +5,7 @@
         <div class="card project-task">
             <div class="card-header">
                 <div class="card-header-left ">
-                    <h3>This is page create brand</h3>
+                    <h3>This is page update brand</h3>
                 </div>
                 <div class="card-header-right">
                     <ul class="list-unstyled card-option">
