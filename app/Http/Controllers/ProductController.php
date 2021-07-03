@@ -26,12 +26,10 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-//        dd($request->filenames);
         $request->validate([
             'product_name' => 'required',
             'unit_price' => 'required',
             'description' => 'required',
-//            'filenames' => 'required|image'
         ]);
 
         $product = new Product();
@@ -53,7 +51,8 @@ class ProductController extends Controller
     public function detail($id)
     {
         $product = Product::with('category', 'brand')->where('id',$id)->get();
-        return view('admin.products.detail', compact('product'));
+        $images = $product[0]->images;
+        return view('admin.products.detail', compact(['product','images']));
     }
 
     public function edit($id)

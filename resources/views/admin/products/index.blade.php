@@ -62,7 +62,7 @@
                                 @endif
                                 <td>
                                     @foreach($product->images as $image)
-                                        <img src="{{ asset("storage/uploads/$image->image")  }}" alt="img" width="150px">
+                                        <img src="{{ asset("storage/uploads/$product->id/$image->image")  }}" alt="img" width="150px">
                                         @break
                                     @endforeach
                                 </td>
