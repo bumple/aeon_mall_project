@@ -23,10 +23,13 @@
                     <h4>{{ $product[0]->product_name }}</h4>
                 </div>
                 <div class="card-img" style="alignment: center">
-                    @foreach($product[0]->images as $image)
-                        <img src="{{ asset("storage/uploads/$image->image")  }}" alt="img" style="margin-left: 30%">
-                        @break
+                    @foreach($images  as $image)
+                        <img src="{{ asset('storage/uploads/'.$product[0]->id.'/'.$image->image)  }}" alt="img" style="margin-left: 30%">
                     @endforeach
+{{--                    @foreach($product[0]->images as $image)--}}
+{{--                        <img src="{{ asset("storage/uploads/$image->image")  }}" alt="img" style="margin-left: 30%">--}}
+{{--                        @break--}}
+{{--                    @endforeach--}}
                 </div>
                 <div class="card-body">
                     <label for="card-body">Description:</label>

@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <button class="btn btn-grd-primary col-sm-4" type="submit" style="margin-left: 32%">Add product
+                    <button class="btn btn-grd-primary col-sm-4" type="submit" style="margin-left: 32%">Add photos
                     </button>
                 </div>
             </form>
