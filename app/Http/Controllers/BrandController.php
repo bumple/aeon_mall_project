@@ -12,17 +12,23 @@ class BrandController extends Controller
 
     public function index()
     {
+        $this->isPermission('admin');
+
         //
     }
 
     public function create()
     {
+        $this->isPermission('admin');
+
         $brands = Brand::all();
         return view('admin.brands.create', compact('brands'));
     }
 
     public function store(Request $request)
     {
+        $this->isPermission('admin');
+
         $request->validate([
             'name' => 'required'
         ]);
@@ -37,17 +43,23 @@ class BrandController extends Controller
 
     public function show($id)
     {
+        $this->isPermission('admin');
+
         //
     }
 
     public function edit($id)
     {
+        $this->isPermission('admin');
+
         $brand = Brand::findOrFail($id);
         return view('admin.brands.edit', compact('brand'));
     }
 
     public function update(Request $request, $id)
     {
+        $this->isPermission('admin');
+
         $request->validate([
            'name' => 'required'
         ]);
@@ -63,6 +75,8 @@ class BrandController extends Controller
 
     public function destroy($id)
     {
+        $this->isPermission('admin');
+
         $brand = Brand::findOrFail($id);
         $brand->products()->update(['brand_id' => null]);
         $brand->delete();

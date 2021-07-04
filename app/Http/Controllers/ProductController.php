@@ -6,20 +6,27 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
 
     public function index()
     {
+        $this->isPermission('admin');
         $products = Product::with('category', 'brand')->get();
         return view('admin.products.index', compact('products'));
     }
 
+
+
     public function create()
     {
+        $this->isPermission('admin');
+
         $brands = Brand::all();
         $categories = Category::all();
         return view('admin.products.create', compact(['brands', 'categories']));
@@ -27,6 +34,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $this->isPermission('admin');
         $request->validate([
             'product_name' => 'required',
             'unit_price' => 'required',
@@ -45,12 +53,16 @@ class ProductController extends Controller
 
     public function show($id)
     {
+        $this->isPermission('admin');
+
         $product_id = $id;
         return view('admin.images.create', compact('product_id'));
     }
 
     public function detail($id)
     {
+        $this->isPermission('admin');
+
         $product = Product::with('category', 'brand')->where('id',$id)->get();
         $images = $product[0]->images;
         return view('admin.products.detail', compact(['product','images']));
@@ -58,16 +70,22 @@ class ProductController extends Controller
 
     public function edit($id)
     {
+        $this->isPermission('admin');
+
         return view('admin.products.edit');
     }
 
     public function update(Request $request, $id)
     {
+        $this->isPermission('admin');
+
         //
     }
 
     public function destroy($id)
     {
+        $this->isPermission('admin');
+
         $unlink = new ImageController();
         $unlink->unlink($id);
         $product = Product::findOrFail($id);
@@ -79,8 +97,11 @@ class ProductController extends Controller
 
     public function destroyAll(Request $request)
     {
+        $this->isPermission('admin');
         $ids = $request->ids;
         Product::where('id', explode(",",$ids))->delete();
         return response()->json(['success'=>"Deleted successfully"]);
     }
+
+
 }
