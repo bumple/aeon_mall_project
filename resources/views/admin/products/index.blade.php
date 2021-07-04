@@ -10,7 +10,9 @@
                 <div class="card-header-right">
                     <ul class="list-unstyled card-option">
                         <li><i class="icofont icofont-simple-left "></i></li>
-                        <li><i class="icofont icofont-maximize full-card"></i></li>
+                        <li>
+                            <i class="icofont icofont-close-squared "></i>
+                        </li>
                         <li><i class="icofont icofont-minus minimize-card"></i></li>
                         <li><i class="icofont icofont-refresh reload-card"></i></li>
                         <li><i class="icofont icofont-error close-card"></i></li>
@@ -27,6 +29,15 @@
                             <th>Category</th>
                             <th>Brand</th>
                             <th>Photo</th>
+                            <th></th>
+                            <th>
+                                <div class="form-group">
+                                    <input type="checkbox" class="check_all" id="master">
+                                    {{--                                    <button style="margin-bottom: 10px" class="btn btn-primary delete_all active"--}}
+                                    {{--                                            data-url="{{ route('products.destroyAll')  }}">X--}}
+                                    {{--                                    </button>--}}
+                                </div>
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -44,29 +55,39 @@
                                     <p class="d-inline-block m-r-20">{{ $product->unit_price }}</p>
 
                                 </td>
+                                @if($product->category_id)
                                 <td>
                                     <p class="d-inline-block m-r-20"><a
                                             href="{{ route('categories.edit', $product->category->id) }}">{{ $product->category->name }}</a>
                                     </p>
-
+                                    @else
+                                        <td><p>Not category</p></td>
                                 </td>
-                                @if($product->brand->id)
+                                @endif
+                                @if($product->brand_id)
                                     <td>
                                         <p class="d-inline-block m-r-20">
                                             <a href="{{ route('brands.edit', $product->brand->id) }}">{{ $product->brand->name }}
                                             </a>
                                         </p>
                                 @else
-                                    <td>Not data</td>
+                                    <td><p>No brand</p></td>
                                     </td>
                                 @endif
                                 <td>
                                     @foreach($product->images as $image)
-                                        <img src="{{ asset("storage/uploads/$product->id/$image->image")  }}" alt="img" width="150px">
+                                        <img src="{{ asset("storage/uploads/$product->id/$image->image")  }}" alt="img"
+                                             width="150px">
                                         @break
                                     @endforeach
                                 </td>
-                                <td><a href="{{ route('products.show', $product->id) }}"><i class="ti-layout-grid2-alt"></i></a></td>
+                                <td><a href="{{ route('products.show', $product->id) }}"><i
+                                            class="ti-layout-grid2-alt"></i></a></td>
+                                <td>
+                                    <input type="checkbox" name="delete" data-id="{{ $product->id }}"
+                                           class="custom_name" value="{{ $product->id }}"
+                                           id="delete_{{ $product->id }}">
+                                </td>
                             </tr>
                         @empty
                             <td>Not data</td>

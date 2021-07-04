@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -35,12 +35,13 @@ class ImageController extends Controller
         //
     }
 
-    public function update(Request $request, $id)
+    public function update($id, Request $request)
     {
-
+        $request->validate([
+            'filenames' => 'required'
+        ]);
         if ($request->hasfile('filenames')) {
             $images = $request->file('filenames');
-
             foreach($images as $image) {
                 $name = rand(1, 100) . date('Y-m-d_h:i:s') . '.' . $image->extension();
                 $image->storeAs("public/uploads/$id", $name);
@@ -50,13 +51,20 @@ class ImageController extends Controller
                 ]);
             }
         }
-
         return redirect()->route('products.index');
-
     }
 
     public function destroy($id)
     {
         //
+    }
+
+    public function unlink($id)
+    {
+        $images = Image::where('product_id',$id)->get();
+        foreach ($images as $image) {
+            File::delete("storage/uploads/$id/$image->image");
+        }
+
     }
 }
