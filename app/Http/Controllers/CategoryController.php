@@ -12,17 +12,23 @@ class CategoryController extends Controller
 
     public function index()
     {
+        $this->isPermission('admin');
+
         //
     }
 
     public function create()
     {
+        $this->isPermission('admin');
+
         $categories = Category::all();
         return view('admin.categories.create', compact('categories'));
     }
 
     public function store(Request $request)
     {
+        $this->isPermission('admin');
+
         $request->validate([
             'name' => 'required'
         ]);
@@ -37,17 +43,23 @@ class CategoryController extends Controller
 
     public function show($id)
     {
+        $this->isPermission('admin');
+
         //
     }
 
     public function edit($id)
     {
+        $this->isPermission('admin');
+
         $category = Category::findOrFail($id);
         return view('admin.categories.edit', compact('category'));
     }
 
     public function update(Request $request, $id)
     {
+        $this->isPermission('admin');
+
         $request->validate([
             'name' => 'required'
         ]);
@@ -64,6 +76,8 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
+        $this->isPermission('admin');
+
         $category = Category::findOrFail($id);
 
         $category->products()->update(['category_id' => null]);
