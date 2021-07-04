@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class BrandSeeder extends Seeder
 {
@@ -13,6 +15,24 @@ class BrandSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('brands')->insert([
+            'name' => Str::random(10),
+        ]);
+
+        DB::table('brands')->insert([
+            'name' => Str::random(10),
+        ]);
+
+        DB::table('brands')->insert([
+            'name' => Str::random(10),
+        ]);
+
+        DB::table('brands')->insert([
+            'name' => Str::random(10),
+        ]);
+
+        DB::table('brands')->insert([
+            'name' => Str::random(10),
+        ]);
     }
 }

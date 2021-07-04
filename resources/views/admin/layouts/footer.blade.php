@@ -1,27 +1,11 @@
-<div id="styleSelector">
-
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="fixed-button">
-    <a href="https://codedthemes.com/item/guru-able-admin-template/" target="_blank" class="btn btn-md btn-primary">
-        <i class="fa fa-shopping-cart" aria-hidden="true"></i> Upgrade To Pro
-    </a>
-</div>
-</div>
-</div>
-
-
 <!-- Required Jquery -->
 <script type="text/javascript" src="{{asset('backend/admin/assets/js/jquery/jquery.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('backend/admin/assets/js/jquery-ui/jquery-ui.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('backend/admin/assets/js/popper.js/popper.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('backend/admin/assets/js/bootstrap/js/bootstrap.min.js')}}"></script>
 <!-- jquery slimscroll js -->
-<script type="text/javascript" src="{{asset('backend/admin/assets/js/jquery-slimscroll/jquery.slimscroll.js')}}"></script>
+<script type="text/javascript"
+        src="{{asset('backend/admin/assets/js/jquery-slimscroll/jquery.slimscroll.js')}}"></script>
 <!-- modernizr js -->
 <script type="text/javascript" src="{{asset('backend/admin/assets/js/modernizr/modernizr.js')}}"></script>
 <!-- am chart -->
@@ -39,11 +23,10 @@
 <script>
     var $window = $(window);
     var nav = $('.fixed-button');
-    $window.scroll(function(){
+    $window.scroll(function () {
         if ($window.scrollTop() >= 200) {
             nav.addClass('active');
-        }
-        else {
+        } else {
             nav.removeClass('active');
         }
     });
