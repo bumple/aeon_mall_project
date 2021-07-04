@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -67,10 +68,19 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
+        $unlink = new ImageController();
+        $unlink->unlink($id);
         $product = Product::findOrFail($id);
-        $product->images()->update(['product_id' => null]);
+        Image::where('product_id',$id)->delete();
         $product->delete();
 
         return redirect()->route('products.index');
+    }
+
+    public function destroyAll(Request $request)
+    {
+        $ids = $request->ids;
+        Product::where('id', explode(",",$ids))->delete();
+        return response()->json(['success'=>"Deleted successfully"]);
     }
 }

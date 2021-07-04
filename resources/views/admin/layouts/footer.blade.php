@@ -30,6 +30,40 @@
             nav.removeClass('active');
         }
     });
+    var button = $('.delete_all')
+    $(".check_all").on("click", function () {
+        if (this.checked) {
+            $(".custom_name").each(function () {
+                $(this).prop("checked", true);
+            });
+        } else {
+            $(".custom_name").each(function () {
+                $(this).prop("checked", false);
+            });
+        }
+    });
+    let origin = window.origin;
+
+    $('.check_all').on('click', function (e) {
+        var allVals = [];
+        $('.custom_name:checked').each(function () {
+            allVals.push($(this).attr('data-id'));
+        });
+        var join_selected_values = allVals.join(",");
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: origin + '/admin/products/deleteAll',
+            method: 'delete',
+            data: "ids=" + join_selected_values,
+            success: function (data) {
+                console.log(response);
+            }
+        })
+    });
 </script>
 </body>
 
