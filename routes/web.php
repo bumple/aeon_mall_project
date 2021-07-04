@@ -3,6 +3,7 @@
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProductController;
 use App\Models\Brand;
 use App\Models\Category;
@@ -34,5 +35,7 @@ Route::prefix('admin')->group(function (){
     ]);
     Route::get('products/{product}/detail', [ProductController::class, 'detail'])->name('products.detail');
     Route::delete('products/deleteAll', [ProductController::class, 'destroyAll'])->name('products.destroyAll');
+
+    Route::get('change-language/{language}', [LanguageController::class, 'changeLanguage'])->name('admin.change-language');
 });
 

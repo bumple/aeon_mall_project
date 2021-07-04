@@ -119,13 +119,18 @@
                             </a>
                             <ul class="show-notification profile-notification">
                                 <li>
-                                    <a href="#!">
-                                        <i class="ti-settings"></i> Settings
+                                    <a href="{!! route('admin.change-language', ['en']) !!}">
+                                        <i class="ti-settings"></i> English
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{!! route('admin.change-language', ['vi']) !!}">
+                                        <i class="ti-settings"></i> Vietnamese
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <i class="ti-user"></i> Profile
+                                        <i class="ti-user"></i> {{ __('language.profile') }}
                                     </a>
                                 </li>
                                 <li>
@@ -140,7 +145,7 @@
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <i class="ti-layout-sidebar-left"></i> Logout
+                                        <i class="ti-layout-sidebar-left"></i> {{ __('language.logout') }}
                                     </a>
                                 </li>
                             </ul>
