@@ -114,7 +114,9 @@
                             <a href="#!">
                                 <img src="{{asset('backend/admin/assets/images/avatar-4.jpg')}}" class="img-radius"
                                      alt="User-Profile-Image">
-                                <span>John Doe</span>
+                                @if(session()->has('email_user'))
+                                    <span>{{ session()->get('email_user')  }}</span>
+                                @endif
                                 <i class="ti-angle-down"></i>
                             </a>
                             <ul class="show-notification profile-notification">
@@ -165,7 +167,9 @@
                                      src="{{asset('backend/admin/assets/images/avatar-4.jpg')}}"
                                      alt="User-Profile-Image">
                                 <div class="user-details">
-                                    <span>John Doe</span>
+                                    @if(session()->has('email_user'))
+                                    <span>{{ session()->get('email_user')  }}</span>
+                                    @endif
                                     <span id="more-details">#<i class="ti-angle-down"></i></span>
                                 </div>
                             </div>
@@ -267,8 +271,8 @@
                                             <div class="card widget-card-1">
                                                 <div class="card-block-small">
                                                     <i class="icofont icofont-ui-home bg-c-pink card1-icon"></i>
-                                                    <span class="text-c-pink f-w-600">Customer</span>
-                                                    <a href=""><h4>23</h4></a>
+                                                    <span class="text-c-pink f-w-600">Shop</span>
+                                                    <a href="{{ route('product.index') }}"><h4>Home</h4></a>
                                                 </div>
                                             </div>
                                         </div>
