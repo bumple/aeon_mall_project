@@ -22,3 +22,4 @@ return [
     'adminpage' => 'Trang Quản Trị',
 
 ];
+

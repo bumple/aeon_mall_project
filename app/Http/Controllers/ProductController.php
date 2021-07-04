@@ -17,7 +17,8 @@ class ProductController extends Controller
     public function index()
     {
         $this->isPermission('admin');
-        $products = Product::with('category', 'brand')->get();
+        $products = Product::with('category', 'brand')->paginate(7);
+
         return view('admin.products.index', compact('products'));
     }
 

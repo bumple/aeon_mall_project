@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-	ustora by freshdesignweb.com
-	Twitter: https://twitter.com/freshdesignweb
-	URL: https://www.freshdesignweb.com/ustora/
--->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -33,7 +28,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-
      alpha/css/bootstrap.css" rel="stylesheet">
 
-{{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--}}
+    {{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--}}
 
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -55,16 +50,23 @@
             <div class="col-md-8">
                 <div class="user-menu">
                     <ul>
-                        <li><a href="#"><i class="fa fa-user"></i> @lang('message.my_account') @if(session()->has('email_user'))<strong style="color:red;text-transform: uppercase">{{' : '. $user->name}}</strong> @endif</a></li>
+                        <li><a href="#"><i
+                                    class="fa fa-user"></i> @lang('message.my_account') @if(session()->has('email_user'))
+                                    <strong
+                                        style="color:red;text-transform: uppercase">{{' : '. $user->name}}</strong> @endif
+                            </a></li>
                         <li><a href="cart.html"><i class="fa fa-user"></i> @lang('message.my_card')</a></li>
                         <li><a href="checkout.html"><i class="fa fa-user"></i>@lang('message.checkout')</a></li>
                         @if(!session()->has('email_user'))
-                        <li><a href="{{route('user.showFormLogin')}}"><i class="fa fa-user"></i> @lang('message.login')   </a></li>
+                            <li><a href="{{route('user.showFormLogin')}}"><i
+                                        class="fa fa-user"></i> @lang('message.login')   </a></li>
                         @else
-                        <li><a href="{{route('user.logout')}}"><i class="fa fa-user"></i> @lang('message.logout') </a></li>
+                            <li><a href="{{route('user.logout')}}"><i class="fa fa-user"></i> @lang('message.logout')
+                                </a></li>
                         @endif
                         @if(isset($user) && $user->type == 1)
-                        <li><a  href="{{route('admin.index')}}"><i class="fa fa-user"></i> @lang('message.adminpage')</a></li>
+                            <li><a href="{{route('admin.index')}}"><i class="fa fa-user"></i> @lang('message.adminpage')
+                                </a></li>
                         @endif
                     </ul>
                 </div>
@@ -85,7 +87,8 @@
 
                         <li class="dropdown dropdown-small">
                             <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span
-                                    class="key">@lang('message.language'): </span><span class="value">{{session()->get('language')}} </span><b
+                                    class="key">@lang('message.language'): </span><span
+                                    class="value">{{session()->get('language')}} </span><b
                                     class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{route('language','en')}}">English</a></li>
@@ -104,7 +107,8 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="logo">
-                    <h1><a href=".."><img style="width:100px;height:100px;background-color: #f9f3f2;border-radius: 10%" src="{{asset('img/logo_shop_app.png')}}"></a></h1>
+                    <h1><a href=".."><img style="width:100px;height:100px;background-color: #f9f3f2;border-radius: 10%"
+                                          src="{{asset('img/logo_shop_app.png')}}"></a></h1>
                 </div>
             </div>
 
@@ -172,8 +176,8 @@
     @if(\Illuminate\Support\Facades\Session::has('message'))
         toastr.options =
         {
-            "closeButton" : true,
-            "progressBar" : true
+            "closeButton": true,
+            "progressBar": true
         }
     toastr.success("{{ session('message') }}");
     @endif
@@ -181,8 +185,8 @@
         @if(\Illuminate\Support\Facades\Session::has('error'))
         toastr.options =
         {
-            "closeButton" : true,
-            "progressBar" : true
+            "closeButton": true,
+            "progressBar": true
         }
     toastr.error("{{ session('error') }}");
     @endif
@@ -190,8 +194,8 @@
         @if(\Illuminate\Support\Facades\Session::has('info'))
         toastr.options =
         {
-            "closeButton" : true,
-            "progressBar" : true
+            "closeButton": true,
+            "progressBar": true
         }
     toastr.info("{{ session('info') }}");
     @endif
@@ -199,8 +203,8 @@
         @if(\Illuminate\Support\Facades\Session::has('warning'))
         toastr.options =
         {
-            "closeButton" : true,
-            "progressBar" : true
+            "closeButton": true,
+            "progressBar": true
         }
     toastr.warning("{{ session('warning') }}");
     @endif
