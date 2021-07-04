@@ -18,7 +18,6 @@ class CreateProductTable extends Migration
             $table->id();
             $table->string('product_name');
             $table->string('description');
-
             $table->bigInteger('unit_price');
             $table->timestamps();
         });
