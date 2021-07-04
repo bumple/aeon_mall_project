@@ -25,9 +25,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-//    return view('admin.layouts.master');
-//});
+Route::get('/', function () {
+    return redirect()->route('product.index');
+});
 
 Route::prefix('admin')->group(function (){
     Route::resources([
