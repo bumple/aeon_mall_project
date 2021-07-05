@@ -68,40 +68,47 @@
             nav.removeClass('active');
         }
     });
-    var button = $('.delete_all')
-    $(".check_all").on("click", function () {
-        if (this.checked) {
-            $(".custom_name").each(function () {
-                $(this).prop("checked", true);
-            });
-        } else {
-            $(".custom_name").each(function () {
-                $(this).prop("checked", false);
-            });
-        }
-    });
+
     let origin = window.origin;
 
-    $('.check_all').on('click', function (e) {
-        var allVals = [];
-        $('.custom_name:checked').each(function () {
-            allVals.push($(this).attr('data-id'));
-        });
-        var join_selected_values = allVals.join(",");
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+    $('#checkall').change(function () {
+        $('.cb-element').prop('checked',this.checked);
+    });
+
+    $('.cb-element').change(function () {
+        if ($('.cb-element:checked').length === $('.cb-element').length){
+            $('#checkall').prop('checked',true);
+            console.log('checked')
+        }
+        else {
+            $('#checkall').prop('checked',false);
+            console.log('test2')
+        }
+    });
+
+    $('#delete-all').click(function (){
+        let id = [];
+        $('.cb-element:checked').each(function (i){
+           id[i] = $(this).val();
+           console.log(id)
         });
         $.ajax({
-            url: origin + '/admin/products/deleteAll',
-            method: 'delete',
-            data: "ids=" + join_selected_values,
-            success: function (data) {
-                console.log(data);
+            url: origin + '/admin/products/delete/all-product',
+            type: 'GET',
+            data: { id : id },
+            success: function (res) {
+                console.log(res)
+                for (let i = 0; i < id.length; i++) {
+                    $('.product-'+ id[i]).remove();
+                }
+            },
+
+            error: function (err) {
+
             }
-        })
+        });
     });
+
 </script>
 </body>
 

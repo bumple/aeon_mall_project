@@ -76,13 +76,4 @@ class UserController extends Controller
         return redirect()->route('product.index');
     }
 
-    public function redirectToProvider()
-    {
-        return Socialite::driver('github')->redirect();
-    }
-
-    public function handleProviderCallback()
-    {
-        $user = Socialite::driver('github')->user();
-    }
 }

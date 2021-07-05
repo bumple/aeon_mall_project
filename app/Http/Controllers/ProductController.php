@@ -115,9 +115,11 @@ class ProductController extends Controller
     public function destroyAll(Request $request)
     {
         $this->isPermission('admin');
-        $ids = $request->ids;
-        Product::where('id', explode(",",$ids))->delete();
-        return response()->json(['success'=>"Deleted successfully"]);
+        $id = $request->id;
+//        return view('test', compact('id'));
+//        dd($id);
+        Image::where('product_id',$id[0])->delete();
+        Product::destroy($id[0]);
     }
 
 

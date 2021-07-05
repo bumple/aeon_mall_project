@@ -8,15 +8,7 @@
                     <h3>This is list products</h3>
                 </div>
                 <div class="card-header-right">
-                    <ul class="list-unstyled card-option">
-                        <li><i class="icofont icofont-simple-left "></i></li>
-                        <li>
-                            <i class="icofont icofont-close-squared "></i>
-                        </li>
-                        <li><i class="icofont icofont-minus minimize-card"></i></li>
-                        <li><i class="icofont icofont-refresh reload-card"></i></li>
-                        <li><i class="icofont icofont-error close-card"></i></li>
-                    </ul>
+                  <button type="submit" id="delete-all">xoa</button>
                 </div>
             </div>
             <div class="card-block p-b-10">
@@ -32,17 +24,14 @@
                             <th></th>
                             <th>
                                 <div class="form-group">
-                                    <input type="checkbox" class="check_all" id="master">
-                                    {{--                                    <button style="margin-bottom: 10px" class="btn btn-primary delete_all active"--}}
-                                    {{--                                            data-url="{{ route('products.destroyAll')  }}">X--}}
-                                    {{--                                    </button>--}}
+                                    <input type="checkbox" name="all" id="checkall">
                                 </div>
                             </th>
                         </tr>
                         </thead>
                         <tbody>
                         @forelse($products as $key => $product)
-                            <tr>
+                            <tr class="product-{{ $product->id }}">
                                 <td>
                                     <div class="task-contain">
                                         <h6 class="bg-c-blue d-inline-block text-center">{{ ++$key }}</h6>
@@ -84,8 +73,8 @@
                                 <td><a href="{{ route('products.show', $product->id) }}"><i
                                             class="ti-layout-grid2-alt"></i></a></td>
                                 <td>
-                                    <input type="checkbox" name="delete" data-id="{{ $product->id }}"
-                                           class="custom_name" value="{{ $product->id }}"
+                                    <input type="checkbox"  name="delete" data-id="{{ $product->id }}"
+                                           class="cb-element" value="{{ $product->id }}"
                                            id="delete_{{ $product->id }}">
                                 </td>
                             </tr>

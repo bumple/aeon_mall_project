@@ -45,7 +45,7 @@ Route::middleware(['locale'])->prefix('admin')->group(function (){
 
     Route::get('/',[AdminController::class,'index'])->name('admin.index');
     Route::get('products/{product}/detail', [ProductController::class, 'detail'])->name('products.detail');
-    Route::delete('products/deleteAll', [ProductController::class, 'destroyAll'])->name('products.destroyAll');
+    Route::get('products/delete/all-product', [ProductController::class, 'destroyAll'])->name('products.destroyAll');
 });
 Route::get('change-language/{language}', [LanguageController::class, 'changeLanguage'])->name('admin.change-language');
 
@@ -63,11 +63,13 @@ Route::prefix('user')->group(function (){
     Route::post('/store',[UserController::class,'store'])->name('user.store');
     Route::get('/logout',[UserController::class,'logout'])->name('user.logout');
 
-    Route::get('login/github', [UserController::class, 'redirectToProvider'])->name('login.github');
-    Route::get('login/github/callback', [UserController::class, 'handleProviderCallback']);
+
 
 });
 
 Route::prefix('language')->group(function (){
     Route::get('/{language}',[LangController::class,'changeLanguage'])->name('language');
 });
+
+Route::get('login/github', [UserController::class, 'redirectToProvider'])->name('login.github');
+Route::get('login/github/callback', [UserController::class, 'handleProviderCallback']);
