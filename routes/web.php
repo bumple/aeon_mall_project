@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ImageController;
 
 use App\Http\Controllers\LangController;
@@ -33,9 +34,9 @@ Route::get('/', function () {
 });
 
 //Route::prefix('admin')->group(function (){
-//Route::get('/', function () {
-//    return view('admin.layouts.master');
-//});
+Route::get('/', function () {
+    return view('admin.layouts.master');
+});
 Route::middleware(['locale'])->prefix('admin')->group(function () {
     Route::resources([
         'images' => ImageController::class,
@@ -76,5 +77,5 @@ Route::prefix('language')->group(function () {
     Route::get('/{language}', [LangController::class, 'changeLanguage'])->name('language');
 });
 
-Route::get('login/github', [UserController::class, 'redirectToProvider'])->name('login.github');
-Route::get('login/github/callback', [UserController::class, 'handleProviderCallback']);
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
