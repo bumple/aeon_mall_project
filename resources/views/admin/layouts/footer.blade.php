@@ -60,7 +60,7 @@
             method: 'delete',
             data: "ids=" + join_selected_values,
             success: function (data) {
-                console.log(response);
+                console.log(data);
             }
         })
     });
