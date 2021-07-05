@@ -93,6 +93,7 @@
                             <td>Not data</td>
                         @endforelse
                         </tbody>
+                        {{ $products->links() }}
                     </table>
                 </div>
             </div>
