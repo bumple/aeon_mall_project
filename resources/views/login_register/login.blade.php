@@ -90,6 +90,13 @@
                             </a>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <a id="github-button" href="" class="btn btn-block btn-social btn-github">
+                                    <i class="fa fa-github"></i> Login in with Github
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
             </form>
