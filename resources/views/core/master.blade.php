@@ -55,7 +55,7 @@
                                     <strong
                                         style="color:red;text-transform: uppercase">{{' : '. $user->name}}</strong> @endif
                             </a></li>
-                        <li><a href="cart.html"><i class="fa fa-user"></i> @lang('message.my_card')</a></li>
+                        <li><a href="{{route('product.cart')}}"><i class="fa fa-user"></i> @lang('message.my_card')</a></li>
                         <li><a href="checkout.html"><i class="fa fa-user"></i>@lang('message.checkout')</a></li>
                         @if(!session()->has('email_user'))
                             <li><a href="{{route('user.showFormLogin')}}"><i
@@ -114,7 +114,7 @@
 
             <div class="col-sm-6">
                 <div class="shopping-item">
-                    <a href="cart.html">Cart - <span class="cart-amunt">$100</span> <i class="fa fa-shopping-cart"></i>
+                    <a href="{{route('product.cart')}}">Cart - <span class="cart-amunt">$100</span> <i class="fa fa-shopping-cart"></i>
                         <span class="product-count">5</span></a>
                 </div>
             </div>
@@ -138,7 +138,7 @@
                     <li class="active"><a href="{{route('product.index')}}">@lang('message.home')</a></li>
                     <li><a href="{{route('product.shop')}}">@lang('message.shop_page')</a></li>
                     <li><a href="single-product.html">@lang('message.single_product')</a></li>
-                    <li><a href="cart.html">@lang('message.cart')</a></li>
+                    <li><a href="{{route('product.cart')}}">@lang('message.cart')</a></li>
                     <li><a href="checkout.html">@lang('message.check_out')</a></li>
                     <li><a href="#">@lang('message.category')</a></li>
                     <li><a href="#">@lang('message.others')</a></li>
