@@ -27,6 +27,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return redirect()->route('product.index');
+});
+
+//Route::prefix('admin')->group(function (){
 //Route::get('/', function () {
 //    return view('admin.layouts.master');
 //});
@@ -38,7 +43,7 @@ Route::middleware(['locale'])->prefix('admin')->group(function (){
         'products' => ProductController::class
     ]);
 
-    Route::get('index',[AdminController::class,'index'])->name('admin.index');
+    Route::get('/',[AdminController::class,'index'])->name('admin.index');
     Route::get('products/{product}/detail', [ProductController::class, 'detail'])->name('products.detail');
     Route::delete('products/deleteAll', [ProductController::class, 'destroyAll'])->name('products.destroyAll');
 });
