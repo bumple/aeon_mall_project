@@ -29,34 +29,23 @@
 
                     <div class="single-sidebar">
                         <h2 class="sidebar-title">Products</h2>
-                        <div class="thubmnail-recent">
-                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="single-product.blade.php">Sony Smart TV - 2015</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>$700.00</ins> <del>$800.00</del>
+                        @foreach($products as $key => $product)
+                            @if($key>4)
+                                @break
+                            @endif
+                            <div class="thubmnail-recent">
+                                @foreach($product->images as $image)
+                                    <img src="{{asset("storage/uploads/$product->id/$image->image")}}"
+                                         class="recent-thumb" alt="">
+                                    @break
+                                @endforeach
+                                <h2><a href="{{route('product.detail',$product->id)}}">{{$product->product_name}}</a></h2>
+                                <div class="product-sidebar-price">
+                                    <ins>{{$product->unit_price." VNĐ"}}</ins>
+                                </div>
                             </div>
-                        </div>
-                        <div class="thubmnail-recent">
-                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="single-product.blade.php">Sony Smart TV - 2015</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>$700.00</ins> <del>$800.00</del>
-                            </div>
-                        </div>
-                        <div class="thubmnail-recent">
-                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="single-product.blade.php">Sony Smart TV - 2015</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>$700.00</ins> <del>$800.00</del>
-                            </div>
-                        </div>
-                        <div class="thubmnail-recent">
-                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="single-product.blade.php">Sony Smart TV - 2015</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>$700.00</ins> <del>$800.00</del>
-                            </div>
-                        </div>
+
+                        @endforeach
                     </div>
 
                     <div class="single-sidebar">

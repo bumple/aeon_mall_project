@@ -17,22 +17,22 @@ class ImageSeeder extends Seeder
     {
         DB::table('images')->insert([
             'image' => Str::random(10),
-            'product_id' => 36,
+            'product_id' => 2,
         ]);
 
         DB::table('images')->insert([
             'image' => Str::random(10),
-            'product_id' => 36,
+            'product_id' => 3,
         ]);
 
         DB::table('images')->insert([
             'image' => Str::random(10),
-            'product_id' => 36,
+            'product_id' => 4,
         ]);
 
         DB::table('images')->insert([
             'image' => Str::random(10),
-            'product_id' => 37,
+            'product_id' => 5,
         ]);
     }
 }
