@@ -26,7 +26,6 @@
                             <input type="submit" value="Search">
                         </form>
                     </div>
-
                     <div class="single-sidebar">
                         <h2 class="sidebar-title">Products</h2>
                         @foreach($products as $key => $product)
@@ -76,35 +75,41 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($products as $product)
                                         <tr class="cart_item">
                                             <td class="product-remove">
                                                 <a title="Remove this item" class="remove" href="#">×</a>
                                             </td>
 
                                             <td class="product-thumbnail">
-                                                <a href="single-product.blade.php"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="img/product-thumb-2.jpg"></a>
+                                                @foreach($product['image'] as $image)
+                                                <a href="{{ route('product.detail', $image->product_id) }}"><img width="145" height="145" alt="" class="shop_thumbnail" src="{{ asset("storage/uploads/$image->product_id/$image->image")  }}"></a>
+
+                                                    @break
+                                                @endforeach
                                             </td>
 
                                             <td class="product-name">
-                                                <a href="single-product.blade.php">Ship Your Idea</a>
+                                                <a href="single-product.blade.php">{{ $product['item']['product_name'] }}</a>
                                             </td>
 
                                             <td class="product-price">
-                                                <span class="amount">£15.00</span>
+                                                <span class="amount">{{ $product['item']['unit_price'] }}</span>
                                             </td>
 
                                             <td class="product-quantity">
                                                 <div class="quantity buttons_added">
                                                     <input type="button" class="minus" value="-">
-                                                    <input type="number" size="4" class="input-text qty text" title="Qty" value="1" min="0" step="1">
+                                                    <input type="number" size="4" class="input-text qty text" title="Qty" value="{{ $product['quantity'] }}" min="0" step="1">
                                                     <input type="button" class="plus" value="+">
                                                 </div>
                                             </td>
 
                                             <td class="product-subtotal">
-                                                <span class="amount">£15.00</span>
+                                                <span class="amount">{{ $product['item']['unit_price'] * $product['quantity'] }}</span>
                                             </td>
                                         </tr>
+                                    @endforeach
                                         <tr>
                                             <td class="actions" colspan="6">
                                                 <div class="coupon">
