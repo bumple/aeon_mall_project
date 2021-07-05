@@ -57,6 +57,10 @@ Route::prefix('user')->group(function (){
     Route::get('/register',[UserController::class,'showFormRegister'])->name('user.showFormRegister');
     Route::post('/store',[UserController::class,'store'])->name('user.store');
     Route::get('/logout',[UserController::class,'logout'])->name('user.logout');
+
+    Route::get('login/github', [UserController::class, 'redirectToProvider'])->name('login.github');
+    Route::get('login/github/callback', [UserController::class, 'handleProviderCallback']);
+
 });
 
 Route::prefix('language')->group(function (){

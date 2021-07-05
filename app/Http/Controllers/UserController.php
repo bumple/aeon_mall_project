@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Laravel\Socialite\Facades\Socialite;
 
 class UserController extends Controller
 {
@@ -73,5 +74,15 @@ class UserController extends Controller
         Session::put('email_user',$email);
 
         return redirect()->route('product.index');
+    }
+
+    public function redirectToProvider()
+    {
+        return Socialite::driver('github')->redirect();
+    }
+
+    public function handleProviderCallback()
+    {
+        $user = Socialite::driver('github')->user();
     }
 }

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>@yield('title')</title>
+    <title>{{ env('APP_NAME') }}</title>
     <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -136,17 +136,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">
-                                        <i class="ti-email"></i> My Messages
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="ti-lock"></i> Lock Screen
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
+                                    <a href="{{ route('user.logout') }}">
                                         <i class="ti-layout-sidebar-left"></i> {{ __('language.logout') }}
                                     </a>
                                 </li>
@@ -161,29 +151,6 @@
                 <nav class="pcoded-navbar">
                     <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                     <div class="pcoded-inner-navbar main-menu">
-                        <div class="">
-                            <div class="main-menu-header">
-                                <img class="img-40 img-radius"
-                                     src="{{asset('backend/admin/assets/images/avatar-4.jpg')}}"
-                                     alt="User-Profile-Image">
-                                <div class="user-details">
-                                    @if(session()->has('email_user'))
-                                    <span>{{ session()->get('email_user')  }}</span>
-                                    @endif
-                                    <span id="more-details">#<i class="ti-angle-down"></i></span>
-                                </div>
-                            </div>
-
-                            <div class="main-menu-content">
-                                <ul>
-                                    <li class="more-details">
-                                        <a href="#"><i class="ti-user"></i>View Profile</a>
-                                        <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                        <a href="#"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
                         <div class="pcoded-search">
                             <span class="searchbar-toggle">  </span>
                             <div class="pcoded-search-box ">
@@ -191,7 +158,7 @@
                                 <span class="search-icon"><i class="ti-search" aria-hidden="true"></i></span>
                             </div>
                         </div>
-                        <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Layout</div>
+                        <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Feature</div>
                         <ul class="pcoded-item pcoded-left-item">
                             <li class="active">
                                 <a href="#">
@@ -227,25 +194,6 @@
                                 </ul>
                             </li>
                         </ul>
-                        <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Forms &amp; Tables</div>
-                        <ul class="pcoded-item pcoded-left-item">
-                            <li>
-                                <a href="form-elements-component.html">
-                                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                    <span class="pcoded-mtext"
-                                          data-i18n="nav.form-components.main">Form Components</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="bs-basic-table.html">
-                                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Basic Table</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                            </li>
-
-                        </ul>
                     </div>
                 </nav>
                 <div class="pcoded-content">
@@ -260,8 +208,8 @@
                                             <div class="card widget-card-1">
                                                 <div class="card-block-small">
                                                     <i class="icofont icofont-pie-chart bg-c-blue card1-icon"></i>
-                                                    <span class="text-c-blue f-w-600">Product</span>
-                                                    <a href="{{ route('products.index') }}"><h4>Manager</h4></a>
+                                                    <span class="text-c-blue f-w-600">{{ __('language.product') }}</span>
+                                                    <a href="{{ route('products.index') }}"><h4>{{ __('language.management') }}</h4></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -271,8 +219,8 @@
                                             <div class="card widget-card-1">
                                                 <div class="card-block-small">
                                                     <i class="icofont icofont-ui-home bg-c-pink card1-icon"></i>
-                                                    <span class="text-c-pink f-w-600">Shop</span>
-                                                    <a href="{{ route('product.index') }}"><h4>Home</h4></a>
+                                                    <span class="text-c-pink f-w-600">{{ __('language.shop') }}</span>
+                                                    <a href="{{ route('product.index') }}"><h4>{{ __('language.home') }}</h4></a>
                                                 </div>
                                             </div>
                                         </div>
