@@ -54,6 +54,9 @@ Route::get('change-language/{language}', [LanguageController::class, 'changeLang
 Route::middleware(['locale'])->prefix('product')->group(function (){
     Route::get('/',[UiController::class,'index'])->name('product.index');
     Route::get('/shop-page', [UiController::class, 'list_shop'])->name('product.shop');
+    Route::get('/{id}/detail',[UiController::class,'detail'])->name('product.detail');
+    Route::get('/cart',[UiController::class,'cart'])->name('product.cart');
+
 });
 
 Route::prefix('user')->group(function (){
