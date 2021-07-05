@@ -37,7 +37,7 @@ Route::prefix('admin')->group(function (){
         'products' => ProductController::class
     ]);
 
-    Route::get('index',[AdminController::class,'index'])->name('admin.index');
+    Route::get('/',[AdminController::class,'index'])->name('admin.index');
     Route::get('products/{product}/detail', [ProductController::class, 'detail'])->name('products.detail');
     Route::delete('products/deleteAll', [ProductController::class, 'destroyAll'])->name('products.destroyAll');
 });
