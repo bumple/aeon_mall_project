@@ -55,7 +55,7 @@ class UserController extends Controller
     public function logout(){
         Auth::logout();
         Session::forget('email_user');
-        return redirect()->back();
+        return redirect()->route('product.index');
     }
 
     public function login(Request $request)

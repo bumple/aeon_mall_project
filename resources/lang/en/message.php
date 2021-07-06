@@ -20,4 +20,6 @@ return [
     'language' => 'Language',
     'currency' => 'Currency',
     'adminpage' => 'Admin Page',
+    'lastest_products' => 'Latest Products'
+
 ];

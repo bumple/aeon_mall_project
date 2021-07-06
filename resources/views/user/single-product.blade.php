@@ -103,7 +103,8 @@
                                         <ins>{{$product1->unit_price." VNĐ"}}</ins>
                                     </div>
 
-                                    <form action="" class="cart">
+                                    <form action="{{ route('product.addToCart', $product->id) }}" class="cart">
+                                        @csrf
                                         <div class="quantity">
                                             <input type="number" size="4" class="input-text qty text" title="Qty"
                                                    value="1" name="quantity" min="1" step="1">

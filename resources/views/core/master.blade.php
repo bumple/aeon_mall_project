@@ -34,7 +34,7 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="{{route('product.index')}}">@lang('message.home')</a></li>
                     <li><a href="{{route('product.shop')}}">@lang('message.shop_page')</a></li>
-                    <li><a href="single-product.html">@lang('message.single_product')</a></li>
+                    <li><a href="{{route('product.detail',6)}}">@lang('message.single_product')</a></li>
                     <li><a href="{{route('product.cart')}}">@lang('message.cart')</a></li>
                     <li><a href="checkout.html">@lang('message.check_out')</a></li>
                     <li><a href="#">@lang('message.category')</a></li>

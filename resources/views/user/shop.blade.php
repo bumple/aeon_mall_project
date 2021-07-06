@@ -21,7 +21,6 @@
                     <div class="col-md-3 col-sm-6">
                         <div class="single-shop-product">
                             <div class="product-upper">
-
                                 @foreach($product->images as $image)
                                     <img src="{{asset("storage/uploads/$product->id/$image->image")}}" alt="">
                                     @break
