@@ -11,7 +11,7 @@
 
             <div class="col-sm-6">
                 <div class="shopping-item">
-                    <a href="{{route('product.cart')}}">Cart - <span class="cart-amunt">{{ \Illuminate\Support\Facades\Session::has(\Illuminate\Support\Facades\Auth::id().'cart') ? \Illuminate\Support\Facades\Session::get(\Illuminate\Support\Facades\Auth::id().'cart')->totalPrice : '' }}</span> <i class="fa fa-shopping-cart"></i>
+                    <a href="{{route('product.cart')}}">My Cart: <span class="cart-amount">{{ \Illuminate\Support\Facades\Session::has(\Illuminate\Support\Facades\Auth::id().'cart') ? \Illuminate\Support\Facades\Session::get(\Illuminate\Support\Facades\Auth::id().'cart')->totalPrice : '' }}</span> <i class="fa fa-shopping-cart"></i>
                         <span class="product-count">{{ \Illuminate\Support\Facades\Session::has(\Illuminate\Support\Facades\Auth::id().'cart') ? \Illuminate\Support\Facades\Session::get(\Illuminate\Support\Facades\Auth::id().'cart')->totalQuantity : '' }}</span></a>
                 </div>
             </div>
