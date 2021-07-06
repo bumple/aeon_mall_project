@@ -6,49 +6,56 @@ use App\Cart;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
     public function addToCart(Request $request, $id)
     {
-        $product = Product::with('images','brand','category')->where('id', $id)->get();
+        $product = Product::with('images', 'brand', 'category')->where('id', $id)->get();
         $product = $product[0];
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $authId = Auth::id();
+        $oldCart = Session::has("$authId.cart") ? Session::get($authId.'cart') : null;
         $cart = new Cart($oldCart);
         $cart->add($product, $product->id);
+        dd($cart);
 
-        $users = User::where('email', Session::get('email_user'))->get();
-        $user = $users[0];
-
-        $request->session()->put('cart', $cart);
-        return redirect()->route('product.cart', compact('user'))->with('message', 'Add to cart success');
+//        $users = User::where('email', Session::get('email_user'))->get();
+//        $user = $users[0];
+//        $request->session()->put([ "$authId.cart" => $cart]);
+        Session::put($authId.'cart', $cart);
+dd(\session()->all());
+        return redirect()->route('product.cart')->with('message', 'Add to cart success');
     }
 
     public function showCart(Request $request)
     {
+
         if (Session::has('email_user')) {
             $users = User::where('email', Session::get('email_user'))->get();
             $user = $users[0];
             $products = Product::with('category', 'brand', 'images')->get();
-            if (!Session::has('cart')) {
-                return view('user.cart', [
-                    'products' => null,
-                    'user' => $user,
-                    ]);
-            }
-            $oldCart = Session::get('cart');
+            $auth_id = Auth::id();
+
+            $oldCart = Session::get("$auth_id");
             $cart = new Cart($oldCart);
-            return view('user.cart', [
-                'products' => $cart->items,
-                'totalPrice' => $cart->totalPrice,
-                'totalQuantity' => $cart->totalQuantity,
-            ])->with('user', $user);
+            $products_cart = $cart->items;
+            $totalPrice = $cart->totalPrice;
+            $totalQuantity = $cart->totalQuantity;
+            return view('user.cart',compact('products_cart','cart','products','totalQuantity','totalPrice','user'));
+
+//            return view('user.cart', [
+//                'products_cart' => $cart->items,
+//                'totalPrice' => $cart->totalPrice,
+//                'totalQuantity' => $cart->totalQuantity,
+//            ])->with('user', $user,);
         }
+
         $users = User::where('email', Session::get('email_user'))->get();
         $user = $users[0];
         $products = Product::with('category', 'brand', 'images')->get();
-        return redirect()->route('product.index', compact('user'))->with('products',$products);
+        return redirect()->route('product.index', compact('user','products'));
     }
 
     public function deleteCart($id)

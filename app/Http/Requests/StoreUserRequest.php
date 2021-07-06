@@ -24,10 +24,18 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name.required' => 'Trường Name bắt buộc nhập',
+            'name' => 'required',
+            'password' => 'required',
+            'email' => 'required|unique:users,email',
+        ];
+    }
+
+    public function messages()
+    {
+        return ['name.required' => 'Trường Name bắt buộc nhập',
             'password.required' => 'Trường password bắt buộc nhập',
             'email.required' => 'Trường Email bắt buộc nhập',
             'email.unique' => 'Mail này đã tồn tại',
-        ];
+            ];
     }
 }
