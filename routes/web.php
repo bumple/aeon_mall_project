@@ -51,16 +51,20 @@ Route::get('change-language/{language}', [LanguageController::class, 'changeLang
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Route::middleware(['locale'])->prefix('product')->group(function () {
+Route::middleware(['locale'])->prefix('/product')->group(function () {
     Route::get('/', [UiController::class, 'index'])->name('product.index');
     Route::get('/shop-page', [UiController::class, 'list_shop'])->name('product.shop');
     Route::get('/{id}/detail', [UiController::class, 'detail'])->name('product.detail');
 //    Route::get('/cart',[UiController::class,'cart'])->name('product.cart');
-    Route::get('/add-cart/{id}', [CartController::class, 'addToCart'])->name('product.addToCart')->middleware('auth');
-    Route::get('/show-cart', [CartController::class, 'showCart'])->name('product.cart')->middleware('auth');
+
     Route::get('/search',[UiController::class,'getSearch'])->name('product.search');
     Route::post('/search/name',[UiController::class,'getSearchAjax'])->name('product.search');
 
+    Route::get('/add-cart/{id}', [CartController::class, 'addToCart'])->name('product.addToCart')->middleware('auth');
+    Route::get('/show-cart', [CartController::class, 'showCart'])->name('product.cart')->middleware('auth');
+    Route::get('/delete-cart/{id}', [CartController::class, 'deleteCart'])->name('product.deleteCart')->middleware('auth');
+    Route::get('/{id}/reduce', [CartController::class, 'reduceByOne'])->name('product.reduceByOne')->middleware('auth');
+    Route::get('{id}/increase', [CartController::class, 'increaseByOne'])->name('product.increaseByOne')->middleware('auth');
 });
 
 Route::prefix('user')->group(function () {
@@ -77,3 +81,5 @@ Route::prefix('language')->group(function () {
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
+Route::post('send-email', [AdminController::class, 'sendEmailPromotion'])->name('send.email');

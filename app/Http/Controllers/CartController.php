@@ -50,6 +50,7 @@ class CartController extends Controller
                 'products' => $cart->items,
                 'totalPrice' => $cart->totalPrice,
                 'totalQuantity' => $cart->totalQuantity,
+                'cart' => $cart
             ])->with('user', $user);
 
         }
@@ -63,34 +64,37 @@ class CartController extends Controller
 
     public function deleteCart($id)
     {
-        if (Session::has('cart')) {
-            $oldCart = Session::get('cart');
+        $user_id = Auth::id();
+        if (Session::has($user_id.'cart')) {
+            $oldCart = Session::get($user_id.'cart');
             $cart = new Cart($oldCart);
             $cart->delete($id);
-            session()->put('cart', $cart);
+            session()->put($user_id.'cart', $cart);
         }
-        return redirect()->route('products.showCart');
+        return redirect()->route('product.cart');
     }
 
     public function reduceByOne($id)
     {
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $user_id = Auth::id();
+        $oldCart = Session::has($user_id.'cart') ? Session::get( $user_id.'cart') : null;
         $cart = new Cart($oldCart);
         $cart->reduceOne($id);
         if (count($cart->items) > 0) {
-            Session::put('cart', $cart);
+            Session::put($user_id.'cart', $cart);
         } else {
-            Session::forget('cart');
+            Session::forget($user_id.'cart');
         }
         return response()->json($cart);
     }
 
     public function increaseByOne($id)
     {
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $user_id = Auth::id();
+        $oldCart = Session::has($user_id.'cart') ? Session::get($user_id.'cart') : null;
         $cart = new Cart($oldCart);
         $cart->increaseOne($id);
-        Session::put('cart', $cart);
+        Session::put($user_id.'cart', $cart);
         return response()->json($cart);
     }
 }

@@ -72,15 +72,15 @@
                                         <th class="product-name">Product</th>
                                         <th class="product-price">Price</th>
                                         <th class="product-quantity">Quantity</th>
-                                        <th class="product-subtotal">Total</th>
+                                        <th class="product-subtotal">Sub Total</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-
                                     @forelse($products as $product)
                                         <tr class="cart_item">
                                             <td class="product-remove">
-                                                <a title="Remove this item" class="remove" href="#">×</a>
+                                                <a title="Remove this item" class="remove"
+                                                   href="{{ route('product.deleteCart', $product['item']['id']) }}">×</a>
                                             </td>
 
                                             <td class="product-thumbnail">
@@ -104,17 +104,22 @@
 
                                             <td class="product-quantity">
                                                 <div class="quantity buttons_added">
-                                                    <input type="button" class="minus" value="-">
-                                                    <input type="number" size="4" class="input-text qty text"
-                                                           title="Qty" value="{{ $product['quantity'] }}" min="0"
-                                                           step="1">
-                                                    <input type="button" class="plus" value="+">
+                                                    <input href="javascript:"
+                                                           onclick="reduce({{ $product['item']['id'] }});" type="button"
+                                                           class="minus" value="-">
+                                                    <input type="number" size="4"
+                                                           class="quantity-item-{{ $product['item']['id'] }}"
+                                                           title="Qty" value="{{ $product['item']['quantity'] }}">
+                                                    <input href="javascript:" type="button"
+                                                           onclick="increase({{ $product['item']['id'] }});"
+                                                           class="plus" value="+">
                                                 </div>
                                             </td>
 
                                             <td class="product-subtotal">
                                                 <span
-                                                    class="amount">{{ $product['item']['unit_price'] * $product['quantity'] }}</span>
+                                                    class="total-price-{{ $product['item']['id'] }}"
+                                                    id="amount">{{ $product['price'] * $product['quantity'] }}</span>
                                             </td>
                                         </tr>
                                     @empty
@@ -123,47 +128,52 @@
                                         </tr>
                                     @endforelse
                                     <tr>
+                                        <th colspan="4">
+                                            <p>Total</p>
+                                        </th>
+                                        <td>
+                                            <p id="total-quantity-cart">{{ $totalQuantity }}</p>
+                                        </td>
+                                        <td>
+                                            @if($products)
+                                                <p id="total-amount"><strong>{{ $totalPrice }}</strong> </p>
+                                            @else
+                                            <p>Not data</p>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td class="actions" colspan="6">
-                                            <div class="coupon">
-                                                <label for="coupon_code">Coupon:</label>
-                                                <input type="text" placeholder="Coupon code" value="" id="coupon_code"
-                                                       class="input-text" name="coupon_code">
-                                                <input type="submit" value="Apply Coupon" name="apply_coupon"
-                                                       class="button">
-                                            </div>
-                                            <input type="submit" value="Update Cart" name="update_cart" class="button">
+                                            <input type="submit" value="Continue Shopping" name="update_cart"
+                                                   class="button">
                                             <input type="submit" value="Checkout" name="proceed"
                                                    class="checkout-button button alt wc-forward">
+
+
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </form>
-                            <div class="row">
-                                <div class="cart_totals" style="width: 100%">
-                                    <h2>Cart Totals</h2>
-
-                                    <table >
-                                        <tbody>
-                                        <tr class="cart-subtotal">
-                                            <th>Cart Subtotal</th>
-                                            <td><span class="amount">£15.00</span></td>
-                                        </tr>
-
-                                        <tr class="shipping">
-                                            <th>Shipping and Handling</th>
-                                            <td>Free Shipping</td>
-                                        </tr>
-
-                                        <tr class="order-total">
-                                            <th>Order Total</th>
-                                            <td><strong><span class="amount">£15.00</span></strong></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                            <form action="{{ route('send.email') }}" method="post">
+                                @csrf
+                                <div class="row">
+                                    <div class="cart_totals" style="width: 100%">
+                                        <h2>Đăng ký nhận tin</h2>
+                                        <h5>Nhận thông tin sản phẩm mới nhất, tin khuyến mãi và nhiều hơn nữa.</h5>
+                                        <table>
+                                            <tbody>
+                                            <tr>
+                                                <td><input style="width: 80%" type="email" name="email"
+                                                           placeholder="Email của bạn">
+                                                    <button type="submit">Đăng ký</button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
-
+                            </form>
                             <div class="row">
                                 <div class="cart-collaterals" style="width: 100%">
                                     <div class="cross-sells">
