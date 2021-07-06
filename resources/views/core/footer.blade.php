@@ -161,7 +161,7 @@
                 let result = res.items[id]['price'] * res.items[id]['quantity'];
 
                 $('.total-price-'+ id).html(result);
-                // $('.amount-subtotal').html
+                $('#total-amount').html(res.totalPrice);
                 $('#total-quantity-cart').html(res.totalQuantity);
             },
             error: function (err) {
@@ -179,7 +179,9 @@
                 $('.quantity-item-' + id).val(res.items[id]['quantity']);
                 // console.log(test);
                 let result = res.items[id]['price'] * res.items[id]['quantity'];
+
                 $('.total-price-' + id).html(result);
+                $('#total-amount').html(res.totalPrice);
                 $('#total-quantity-cart').html(res.totalQuantity);
             },
             error: function (err) {

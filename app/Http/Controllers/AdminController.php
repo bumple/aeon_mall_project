@@ -15,4 +15,17 @@ class AdminController extends Controller
         return view('admin.layouts.master')->with('message','Chào sếp đến với trang quản trị');
     }
 
+    public function sendEmailPromotion(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email'
+        ]);
+
+        $details = [
+            'title' => 'Welcome to Boutique Brothers!',
+            'url' => 'https://www.Codegym.vn'
+        ];
+dd($request->input('email'));
+        Mail::to($request->input('email'))->send(new UserRegisteredMail($details));
+    }
 }
