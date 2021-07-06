@@ -77,7 +77,7 @@
                                     </thead>
                                     <tbody>
                                     @forelse($products as $product)
-                                        <tr class="cart_item">
+                                        <tr class="cart-item-{{ $product['item']['id'] }}">
                                             <td class="product-remove">
                                                 <a title="Remove this item" class="remove"
                                                    href="{{ route('product.deleteCart', $product['item']['id']) }}">×</a>
@@ -148,8 +148,6 @@
                                                    class="button">
                                             <input type="submit" value="Checkout" name="proceed"
                                                    class="checkout-button button alt wc-forward">
-
-
                                         </td>
                                     </tr>
                                     </tbody>

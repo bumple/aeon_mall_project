@@ -67,8 +67,7 @@ class Cart
         $this->totalQuantity--;
         $this->totalPrice -= $this->items[$id]['price'];
 
-
-        if ($this->items[$id]['quantity'] <= 0) {
+        if ($this->items[$id]['quantity'] < 0) {
 //            dd($this->items[$id]);
             unset($this->items[$id]);
         }

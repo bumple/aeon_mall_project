@@ -159,7 +159,10 @@
                 $('.quantity-item-' + id).val(res.items[id]['quantity']);
 
                 let result = res.items[id]['price'] * res.items[id]['quantity'];
-
+                if (res.items[id]['quantity'] === 0) {
+                    alert('Are you sure?');
+                    $('.cart-item-' + id).remove();
+                }
                 $('.total-price-'+ id).html(result);
                 $('#total-amount').html(res.totalPrice);
                 $('#total-quantity-cart').html(res.totalQuantity);
