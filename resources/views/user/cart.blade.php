@@ -76,11 +76,10 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-
                                     @forelse($products as $product)
                                         <tr class="cart_item">
                                             <td class="product-remove">
-                                                <a title="Remove this item" class="remove" href="#">×</a>
+                                                <a title="Remove this item" class="remove" href="{{ route('product.deleteCart', $product['item']['id']) }}">×</a>
                                             </td>
 
                                             <td class="product-thumbnail">
@@ -104,17 +103,16 @@
 
                                             <td class="product-quantity">
                                                 <div class="quantity buttons_added">
-                                                    <input type="button" class="minus" value="-">
-                                                    <input type="number" size="4" class="input-text qty text"
-                                                           title="Qty" value="{{ $product['quantity'] }}" min="0"
-                                                           step="1">
-                                                    <input type="button" class="plus" value="+">
+                                                    <input href="javascript:" onclick="reduce({{ $product['item']['id'] }});" type="button" class="minus" value="-">
+                                                    <input type="number" size="4" class="quantity-item-{{ $product['item']['id'] }}"
+                                                           title="Qty" value="{{ $product['item']['quantity'] }}">
+                                                    <input href="javascript:" type="button" onclick="increase({{ $product['item']['id'] }});" class="plus" value="+">
                                                 </div>
                                             </td>
 
                                             <td class="product-subtotal">
                                                 <span
-                                                    class="amount">{{ $product['item']['unit_price'] * $product['quantity'] }}</span>
+                                                    class="total-price-{{ $product['item']['id'] }}" id="amount">{{ $product['price'] * $product['quantity'] }}</span>
                                             </td>
                                         </tr>
                                     @empty
@@ -147,7 +145,7 @@
                                         <tbody>
                                         <tr class="cart-subtotal">
                                             <th>Cart Subtotal</th>
-                                            <td><span class="amount">£15.00</span></td>
+                                            <td><span class="amount-subtotal">{{ $totalPrice }}</span></td>
                                         </tr>
 
                                         <tr class="shipping">

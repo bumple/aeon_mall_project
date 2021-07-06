@@ -22,14 +22,12 @@ class GoogleController extends Controller
         try {
 
             $user = Socialite::driver('google')->stateless()->user();
-
             $finduser = User::where('google_id', $user->id)->first();
 
             if($finduser){
 
                 Auth::login($finduser);
                 Session::put('email_user',$finduser['email']);
-//                dd(Session::get('email_user'));
 
                 return redirect()->route('product.index');
 

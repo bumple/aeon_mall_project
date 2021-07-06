@@ -59,6 +59,7 @@ class Cart
 
     public function reduceOne($id)
     {
+//        dd($this->items);
         $this->items[$id]['quantity']--;
         $this->items[$id]['price'] -= $this->items[$id]['item']['price'];
         $this->totalQuantity--;
@@ -71,6 +72,7 @@ class Cart
 
     public function increaseOne($id)
     {
+//        dd($this->items);
         $this->items[$id]['quantity']++;
         $this->items[$id]['price'] += $this->items[$id]['item']['price'];
         $this->totalQuantity++;
