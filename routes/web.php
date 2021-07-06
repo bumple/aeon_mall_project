@@ -34,9 +34,7 @@ Route::get('/', function () {
 });
 
 //Route::prefix('admin')->group(function (){
-Route::get('/', function () {
-    return view('admin.layouts.master');
-});
+
 Route::middleware(['locale'])->prefix('admin')->group(function () {
     Route::resources([
         'images' => ImageController::class,

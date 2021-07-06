@@ -6,6 +6,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
 
 class GoogleController extends Controller
@@ -27,6 +28,8 @@ class GoogleController extends Controller
             if($finduser){
 
                 Auth::login($finduser);
+                Session::put('email_user',$finduser['email']);
+//                dd(Session::get('email_user'));
 
                 return redirect()->route('product.index');
 
