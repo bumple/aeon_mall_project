@@ -25,7 +25,7 @@ class AdminController extends Controller
             'title' => 'Welcome to Boutique Brothers!',
             'url' => 'https://www.Codegym.vn'
         ];
-dd($request->input('email'));
+
         Mail::to($request->input('email'))->send(new UserRegisteredMail($details));
     }
 }

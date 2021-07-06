@@ -26,6 +26,7 @@ class CartController extends Controller
         $users = User::where('email', Session::get('email_user'))->get();
         $user = $users[0];
         $request->session()->put($user_id.'cart', $cart);
+        return response()->json($cart);
         return redirect()->route('product.index', compact('user'))->with('message', 'Add to cart success');
     }
 
