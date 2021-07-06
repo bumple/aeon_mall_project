@@ -61,17 +61,19 @@ class UiController extends Controller
             $products = Product::with('images', 'category', 'brand')->get();
             $categories = Category::all();
             $brands = Brand::all();
+            dd($product1);
             $relate_brand_products = $this->list_relationship_brand_products($id);
 
             return view('user.single-product', compact('product1', 'relate_brand_products', 'brands', 'user', 'products', 'categories'));
         }
-        $product = Product::with('images', 'category', 'brand')->where('id', $id)->get();
-        $product = $product[0];
+        $product1 = Product::with('images', 'category', 'brand')->where('id', $id)->get();
+        $product1 = $product1[0];
         $products = Product::with('images', 'category', 'brand')->get();
+
         $brands = Brand::all();
         $categories = Category::all();
         $relate_brand_products = $this->list_relationship_brand_products($id);
-        return view('user.single-product', compact('product', 'relate_brand_products', 'brands', 'products', 'categories'));
+        return view('user.single-product', compact('product1', 'relate_brand_products', 'brands', 'products', 'categories'));
     }
 
     public function list_relationship_brand_products($product_id)
@@ -87,4 +89,14 @@ class UiController extends Controller
         $category_id = $product[0]->category_id;
         return Product::with('images', 'category', 'brand')->where('category_id', $category_id)->get();
     }
+
+    public function getSearch(Request $request){
+            return view('user.searchajax');
+    }
+
+    public function getSearchAjax(){
+
+    }
+
+
 }
