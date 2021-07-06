@@ -191,5 +191,13 @@
     }
 
 </script>
+
+{{--<script>--}}
+{{--    $(document).ready(function (){--}}
+{{--        $('body').on('click','.add-to-cart-link',function (){--}}
+{{--            alert(1)--}}
+{{--        })--}}
+{{--    })--}}
+{{--</script>--}}
 </body>
 </html>
