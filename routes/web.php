@@ -77,3 +77,5 @@ Route::prefix('language')->group(function () {
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
+Route::post('send-email', [AdminController::class, 'sendEmailPromotion'])->name('send.email');
