@@ -15,7 +15,11 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            return route('login');
+//            $warning = 'Bạn cần đăng nhập để sử dụng chắc năng giỏ hàng!';
+            session()->flash('warning','Bạn cần đăng nhập để sử dụng chắc năng giỏ hàng!');
+
+//            return redirect()->route('user.showFormLogin')->with('error','Bạn cần đăng nhập để sử dụng chắc năng giỏ hàng!');
+            return route('user.showFormLogin',);
         }
     }
 }

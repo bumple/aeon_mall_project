@@ -56,8 +56,10 @@ Route::middleware(['locale'])->prefix('product')->group(function () {
     Route::get('/shop-page', [UiController::class, 'list_shop'])->name('product.shop');
     Route::get('/{id}/detail', [UiController::class, 'detail'])->name('product.detail');
 //    Route::get('/cart',[UiController::class,'cart'])->name('product.cart');
-    Route::get('/add-cart/{id}', [CartController::class, 'addToCart'])->name('product.addToCart');
-    Route::get('/show-cart', [CartController::class, 'showCart'])->name('product.cart');
+    Route::get('/add-cart/{id}', [CartController::class, 'addToCart'])->name('product.addToCart')->middleware('auth');
+    Route::get('/show-cart', [CartController::class, 'showCart'])->name('product.cart')->middleware('auth');
+    Route::get('/search',[UiController::class,'getSearch'])->name('product.search');
+    Route::post('/search/name',[UiController::class,'getSearchAjax'])->name('product.search');
 
 });
 
