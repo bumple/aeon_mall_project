@@ -5,7 +5,10 @@
             <div class="col-md-3 col-sm-6">
                 <div class="footer-about-us">
                     <h2>Ai<span>Shop</span></h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus vero quam laborum quas alias dolores blanditiis iusto consequatur, modi aliquid eveniet eligendi iure eaque ipsam iste, pariatur omnis sint! Suscipit, debitis, quisquam. Laborum commodi veritatis magni at?</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus vero quam
+                        laborum quas alias dolores blanditiis iusto consequatur, modi aliquid eveniet eligendi iure
+                        eaque ipsam iste, pariatur omnis sint! Suscipit, debitis, quisquam. Laborum commodi veritatis
+                        magni at?</p>
                     <div class="footer-social">
                         <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
                         <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
@@ -44,7 +47,8 @@
             <div class="col-md-3 col-sm-6">
                 <div class="footer-newsletter">
                     <h2 class="footer-wid-title">Newsletter</h2>
-                    <p>Sign up to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</p>
+                    <p>Sign up to our newsletter and get exclusive deals you wont find anywhere else straight to your
+                        inbox!</p>
                     <div class="newsletter-form">
                         <form action="#">
                             <input type="email" placeholder="Type your email">
@@ -137,7 +141,52 @@
         }
     toastr.warning("{{ session('warning') }}");
     @endif
+</script>
 
+// AjAX - Cart
+
+<script>
+    let origin = window.origin;
+
+    function reduce(id) {
+        $.ajax({
+            url: origin + '/product/' + id + '/reduce',
+            method: 'get',
+            success: function (res) {
+                console.log(res)
+                // $('#total-quantity').val(res.totalQuantity);
+                // $('#quantity-item').val(res.items.id.quantity);
+                $('.quantity-item-' + id).val(res.items[id]['quantity']);
+
+                let result = res.items[id]['price'] * res.items[id]['quantity'];
+
+                $('.total-price-'+ id).html(result);
+                // $('.amount-subtotal').html
+                $('#total-quantity-cart').html(res.totalQuantity);
+            },
+            error: function (err) {
+
+            }
+        });
+    }
+
+    function increase(id) {
+        $.ajax({
+            url: origin + '/product/' + id + '/increase',
+            method: 'get',
+            success: function (res) {
+                console.log(res);
+                $('.quantity-item-' + id).val(res.items[id]['quantity']);
+                // console.log(test);
+                let result = res.items[id]['price'] * res.items[id]['quantity'];
+                $('.total-price-' + id).html(result);
+                $('#total-quantity-cart').html(res.totalQuantity);
+            },
+            error: function (err) {
+
+            }
+        });
+    }
 
 </script>
 </body>
