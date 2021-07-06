@@ -34,9 +34,7 @@ Route::get('/', function () {
 });
 
 //Route::prefix('admin')->group(function (){
-Route::get('/', function () {
-    return view('admin.layouts.master');
-});
+
 Route::middleware(['locale'])->prefix('admin')->group(function () {
     Route::resources([
         'images' => ImageController::class,
@@ -71,8 +69,6 @@ Route::prefix('user')->group(function () {
     Route::get('/register', [UserController::class, 'showFormRegister'])->name('user.showFormRegister');
     Route::post('/store', [UserController::class, 'store'])->name('user.store');
     Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
-
-
 });
 
 Route::prefix('language')->group(function () {

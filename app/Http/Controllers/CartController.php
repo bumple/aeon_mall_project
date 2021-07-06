@@ -13,6 +13,7 @@ class CartController extends Controller
 {
     public function addToCart(Request $request, $id)
     {
+
         $user_id = Auth::id();
 
         $product = Product::with('images', 'brand', 'category')->where('id', $id)->get();
@@ -20,6 +21,7 @@ class CartController extends Controller
         $oldCart = Session::has($user_id.'cart') ? Session::get($user_id.'cart') : null;
         $cart = new Cart($oldCart);
         $cart->add($product, $product->id);
+
 
         $users = User::where('email', Session::get('email_user'))->get();
         $user = $users[0];
@@ -29,10 +31,12 @@ class CartController extends Controller
 
     public function showCart(Request $request)
     {
+
         if (Session::has('email_user')) {
             $users = User::where('email', Session::get('email_user'))->get();
             $user = $users[0];
             $products = Product::with('category', 'brand', 'images')->get();
+
             $user_id = Auth::id();
             if (!Session::has($user_id.'cart')) {
                 return view('user.cart', [
@@ -40,7 +44,6 @@ class CartController extends Controller
                     'user' => $user,
                 ])->with('products', $products);
             }
-//            dd(\session()->all());
             $oldCart = Session::get($user_id.'cart');
             $cart = new Cart($oldCart);
             return view('user.cart', [
@@ -51,9 +54,11 @@ class CartController extends Controller
             ])->with('user', $user);
 
         }
+
         $users = User::where('email', Session::get('email_user'))->get();
         $user = $users[0];
         $products = Product::with('category', 'brand', 'images')->get();
+
         return redirect()->route('product.index', compact('user'))->with('products', $products);
     }
 

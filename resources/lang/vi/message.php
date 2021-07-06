@@ -15,11 +15,12 @@ return [
     'contact' => 'LIÊN HỆ',
     '30_days' => '30 Ngày hoàn trả',
     'freeship' => 'MIỄN PHÍ SHIP',
-    'secure_payments' => 'BẢO MẬT THANH TOÁN',
-    'new_products' => 'SẢN PHẨM NEW',
+    'secure_payments' => 'BẢO MẬT',
+    'new_products' => 'SẢN PHẨM MỚI',
     'language' => 'Ngôn ngữ',
     'currency' => 'Loại tiền tệ',
     'adminpage' => 'Trang Quản Trị',
+    'lastest_products' => 'Sản Phẩm Mới'
 
 ];
 
