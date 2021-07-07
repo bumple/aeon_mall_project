@@ -159,8 +159,11 @@
                 $('.quantity-item-' + id).val(res.items[id]['quantity']);
 
                 let result = res.items[id]['price'] * res.items[id]['quantity'];
-
-                $('.total-price-'+ id).html(result);
+                if (res.items[id]['quantity'] === 0) {
+                    alert('Are you sure?');
+                    $('.cart-item-' + id).remove();
+                }
+                $('.total-price-' + id).html(result);
                 $('#total-amount').html(res.totalPrice);
                 $('#total-quantity-cart').html(res.totalQuantity);
             },
@@ -190,14 +193,32 @@
         });
     }
 
+    function addToCart(id) {
+        $.ajax({
+            url: origin + '/product/add-cart/' + id,
+            method: 'get',
+            success: function (res) {
+                console.log(res );
+                $('.cart-amount').html(res.totalPrice);
+                $('.product-count').html(res.totalQuantity);
+            }
+        })
+    }
+
 </script>
 
-{{--<script>--}}
-{{--    $(document).ready(function (){--}}
-{{--        $('body').on('click','.add-to-cart-link',function (){--}}
-{{--            alert(1)--}}
-{{--        })--}}
-{{--    })--}}
-{{--</script>--}}
+<script>
+    $(document).ready(function () {
+        // $('.add-to-cart-link').change(function (){
+        //     console.log(1);
+        // })
+
+        $(document).on('click', '#payPaylRedirect', function () {
+
+// Do click stuff here
+
+        });
+    });
+</script>
 </body>
 </html>

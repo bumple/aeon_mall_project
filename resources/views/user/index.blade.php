@@ -96,7 +96,9 @@
                                     @endforeach
                                     <div class="product-hover">
 {{--                                        <button class="add-to-cart-link" id="{{$product->id}}"><i class="fa fa-shopping-cart"></i>ADD TO CART</button>--}}
-                                        <a href="{{ route('product.addToCart', $product->id) }}" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                        <a href="javascript:" class="add-to-cart-link" onclick="addToCart({{ $product->id }})" id="add-to-cart-"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+
+{{--                                        <a href="{{ route('product.addToCart', $product->id) }}" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>--}}
                                         <a href="{{route('product.detail',$product->id)}}" class="view-details-link"><i class="fa fa-link"></i> See details</a>
                                     </div>
                                 </div>

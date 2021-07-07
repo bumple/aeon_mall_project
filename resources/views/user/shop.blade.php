@@ -22,7 +22,7 @@
                         <div class="single-shop-product">
                             <div class="product-upper">
                                 @foreach($product->images as $image)
-                                    <img src="{{asset("storage/uploads/$product->id/$image->image")}}" alt="">
+                                    <img src="{{asset("storage/uploads/$product->id/$image->image")}}" style="width: 250px; height: 250px" alt="">
                                     @break
                                 @endforeach
                             </div>

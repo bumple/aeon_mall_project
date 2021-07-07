@@ -84,7 +84,6 @@
                                                     <a title="Remove this item" class="remove"
                                                        href="{{ route('product.deleteCart', $item['item']['id']) }}">×</a>
                                                 </td>
-
                                                 <td class="product-thumbnail">
                                                     @forelse($item['image'] as $image)
                                                         <a href="{{ route('product.detail', $image->product_id) }}">
@@ -152,8 +151,6 @@
                                                    class="button">
                                             <input type="submit" value="Checkout" name="proceed"
                                                    class="checkout-button button alt wc-forward">
-
-
                                         </td>
                                     </tr>
                                     </tbody>
