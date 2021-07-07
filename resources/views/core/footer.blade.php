@@ -198,27 +198,104 @@
             url: origin + '/product/add-cart/' + id,
             method: 'get',
             success: function (res) {
-                console.log(res );
+                console.log(res);
                 $('.cart-amount').html(res.totalPrice);
                 $('.product-count').html(res.totalQuantity);
             }
-        })
+        });
     }
 
-</script>
+    $('.send-mail').on('click',function (e){
+        $.ajax({
+            url: origin + '/send-email/',
+            method: 'post',
 
-<script>
-    $(document).ready(function () {
-        // $('.add-to-cart-link').change(function (){
-        //     console.log(1);
-        // })
+        })
+    });
 
-        $(document).on('click', '#payPaylRedirect', function () {
-
-// Do click stuff here
-
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+    // hien thi cac tinh
+    $(window).on('load', function () {
+        $.ajax({
+            url: 'https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/province',
+            method: 'GET',
+            headers: {
+                'token': "d250e2f1-de5e-11eb-9388-d6e0030cbbb7",
+                'Content-Type': 'application/json'
+            },
+            dataType: 'json',
+            success: function (res) {
+                let data  = res.data;
+                let html = '<option value="">-Tỉnh thành-</option>'
+                $.each(data , function (index , item){
+                    // console.log(item)
+                    html += '<option provinceID="'+item.ProvinceID+'" value="'+item.ProvinceName+'">'+item.ProvinceName+'</option>'
+                })
+                $('#province').html(html)
+            },
+            error: function () {
+            }
         });
     });
+
+    // hien thi quan-huyen-phuong-xa
+    $(document).ready(function (){
+        // hien thi quan huyen
+        $('body').on('change','#province',function (){
+            let provinceID = $('option:selected' , this ).attr('provinceID');
+            $.ajax({
+                url: 'https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/district',
+                method: 'GET',
+                headers: {
+                    'token': "d250e2f1-de5e-11eb-9388-d6e0030cbbb7",
+                    'Content-Type': 'application/json'
+                },
+                dataType: 'json',
+                success: function (res) {
+                    let data  = res.data;
+                    let html = '<option value="">-Quận Huyện-</option>'
+                    $.each(data , function (index , item){
+                        if (item.ProvinceID == provinceID){
+                            html += '<option districtID="'+item.DistrictID+'" value="'+item.DistrictName+'">'+item.DistrictName+'</option>'
+                        }
+                    })
+                    $('#district').html(html)
+                },
+                error: function () {
+                }
+            })
+        })
+        // hien thi phuong xa
+        $('body').on('change','#district',function (){
+            let districtID = $('option:selected' , this).attr('districtID')
+            console.log(districtID)
+            $.ajax({
+                url: 'https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward?district_id=' + districtID,
+                method: 'GET',
+                headers: {
+                    'token': "d250e2f1-de5e-11eb-9388-d6e0030cbbb7",
+                    'Content-Type': 'application/json'
+                },
+                dataType: 'json',
+                success: function (res) {
+                    let data  = res.data;
+                    let html = '<option value="">-Phường Xã-</option>'
+                    $.each(data , function (index , item){
+                        console.log(item)
+                        if (item.DistrictID == districtID){
+                            html += '<option value="'+item.WardName+'">'+item.WardName+'</option>'
+                        }
+                    })
+                    $('#ward').html(html)
+                },
+                error: function () {
+                }
+            })
+        })
+    });
+    $('.collapse').collapse()
 </script>
 </body>
 </html>

@@ -26,8 +26,9 @@ class CartController extends Controller
         $users = User::where('email', Session::get('email_user'))->get();
         $user = $users[0];
         $request->session()->put($user_id.'cart', $cart);
+
+        Session::flash('message', 'Add to cart success');
         return response()->json($cart);
-        return redirect()->route('product.index', compact('user'))->with('message', 'Add to cart success');
     }
 
     public function showCart(Request $request)
@@ -41,7 +42,7 @@ class CartController extends Controller
             $user_id = Auth::id();
             if (!Session::has($user_id.'cart')) {
                 return view('user.cart', [
-//                    'products' => null,
+                    'items' => null,
                     'user' => $user,
                 ])->with('products', $products);
             }

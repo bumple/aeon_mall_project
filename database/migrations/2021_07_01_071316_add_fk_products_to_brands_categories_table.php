@@ -13,7 +13,7 @@ class AddFkProductsToBrandsCategoriesTable extends Migration
      */
     public function up()
     {
-
+//        Schema::dropIfExists('products');
         Schema::table('products', function (Blueprint $table) {
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
@@ -30,8 +30,7 @@ class AddFkProductsToBrandsCategoriesTable extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('category_id');
-            $table->dropColumn('brand_id');
+
         });
     }
 }
