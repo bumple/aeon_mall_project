@@ -30,6 +30,7 @@
                             @if($key>4)
                                 @break
                             @endif
+
                             <div class="thubmnail-recent">
                                 @forelse($product->images as $image)
                                     <img src="{{asset("storage/uploads/$product->id/$image->image")}}"
@@ -76,57 +77,60 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @forelse($products as $product)
-                                        <tr class="cart_item">
-                                            <td class="product-remove">
-                                                <a title="Remove this item" class="remove"
-                                                   href="{{ route('product.deleteCart', $product['item']['id']) }}">×</a>
-                                            </td>
+                                    @if(!is_null($items))
+                                        @forelse($items as $item)
+                                            <tr class="cart_item">
+                                                <td class="product-remove">
+                                                    <a title="Remove this item" class="remove"
+                                                       href="{{ route('product.deleteCart', $item['item']['id']) }}">×</a>
+                                                </td>
 
-                                            <td class="product-thumbnail">
-                                                @forelse($product['image'] as $image)
-                                                    <a href="{{ route('product.detail', $image->product_id) }}">
-                                                        <img width="145" height="145" alt="" class="shop_thumbnail"
-                                                             src="{{ asset("storage/uploads/$image->product_id/$image->image")  }}"></a>
-                                                    @break
-                                                @empty
-                                                    <p>Not data</p>
-                                                @endforelse
-                                            </td>
+                                                <td class="product-thumbnail">
+                                                    @forelse($item['image'] as $image)
+                                                        <a href="{{ route('product.detail', $image->product_id) }}">
+                                                            <img width="145" height="145" alt="" class="shop_thumbnail"
+                                                                 src="{{ asset("storage/uploads/$image->product_id/$image->image")  }}"></a>
+                                                        @break
+                                                    @empty
+                                                        <p>Not data</p>
+                                                    @endforelse
+                                                </td>
 
-                                            <td class="product-name">
-                                                <a href="single-product.blade.php">{{ $product['item']['product_name'] }}</a>
-                                            </td>
+                                                <td class="product-name">
+                                                    <a href="single-product.blade.php">{{ $item['item']['product_name'] }}</a>
+                                                </td>
 
-                                            <td class="product-price">
-                                                <span class="amount">{{ $product['item']['unit_price'] }}</span>
-                                            </td>
+                                                <td class="product-price">
+                                                    <span class="amount">{{ $item['item']['unit_price'] }}</span>
+                                                </td>
 
-                                            <td class="product-quantity">
-                                                <div class="quantity buttons_added">
-                                                    <input href="javascript:"
-                                                           onclick="reduce({{ $product['item']['id'] }});" type="button"
-                                                           class="minus" value="-">
-                                                    <input type="number" size="4"
-                                                           class="quantity-item-{{ $product['item']['id'] }}"
-                                                           title="Qty" value="{{ $product['item']['quantity'] }}">
-                                                    <input href="javascript:" type="button"
-                                                           onclick="increase({{ $product['item']['id'] }});"
-                                                           class="plus" value="+">
-                                                </div>
-                                            </td>
+                                                <td class="product-quantity">
+                                                    <div class="quantity buttons_added">
+                                                        <input href="javascript:"
+                                                               onclick="reduce({{ $item['item']['id'] }});"
+                                                               type="button"
+                                                               class="minus" value="-">
+                                                        <input type="number" size="4"
+                                                               class="quantity-item-{{ $item['item']['id'] }}"
+                                                               title="Qty" value="{{ $item['item']['quantity'] }}">
+                                                        <input href="javascript:" type="button"
+                                                               onclick="increase({{ $item['item']['id'] }});"
+                                                               class="plus" value="+">
+                                                    </div>
+                                                </td>
 
-                                            <td class="product-subtotal">
+                                                <td class="product-subtotal">
                                                 <span
-                                                    class="total-price-{{ $product['item']['id'] }}"
-                                                    id="amount">{{ $product['price'] * $product['quantity'] }}</span>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td>Not data</td>
-                                        </tr>
-                                    @endforelse
+                                                    class="total-price-{{ $item['item']['id'] }}"
+                                                    id="amount">{{ $item['price'] * $item['quantity'] }}</span>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td>Not data</td>
+                                            </tr>
+                                        @endforelse
+                                    @endif
                                     <tr>
                                         <th colspan="4">
                                             <p>Total</p>
@@ -136,9 +140,9 @@
                                         </td>
                                         <td>
                                             @if($products)
-                                                <p id="total-amount"><strong>{{ $totalPrice }}</strong> </p>
+                                                <p id="total-amount"><strong>{{ $totalPrice }}</strong></p>
                                             @else
-                                            <p>Not data</p>
+                                                <p>Not data</p>
                                             @endif
                                         </td>
                                     </tr>
