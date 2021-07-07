@@ -89,11 +89,14 @@ class UiController extends Controller
         return Product::with('images', 'category', 'brand')->where('category_id', $category_id)->get();
     }
 
-    public function getSearch(Request $request){
-            return view('user.searchajax');
+    public function getSearch(Request $request)
+    {
+        return view('user.searchajax');
     }
 
-    public function getSearchAjax(){
+    public function getSearchAjax()
+    {
+        dd(1);
 
     }
 

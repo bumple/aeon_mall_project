@@ -64,7 +64,8 @@
                 <div class="col-md-8">
                     <div class="product-content-right">
                         <div class="woocommerce ">
-                            <form method="post" action="#">
+{{--                            <form method="post" action="{{ route('orders.store') }}">--}}
+                                @csrf
                                 <table cellspacing="0" class="shop_table cart">
                                     <thead>
                                     <tr>
@@ -111,7 +112,7 @@
                                                                class="minus" value="-">
                                                         <input type="number" size="4"
                                                                class="quantity-item-{{ $item['item']['id'] }}"
-                                                               title="Qty" value="{{ $item['item']['quantity'] }}">
+                                                               title="Qty" value="{{ $item ['quantity'] }}">
                                                         <input href="javascript:" type="button"
                                                                onclick="increase({{ $item['item']['id'] }});"
                                                                class="plus" value="+">
@@ -149,12 +150,141 @@
                                         <td class="actions" colspan="6">
                                             <input type="submit" value="Continue Shopping" name="update_cart"
                                                    class="button">
-                                            <input type="submit" value="Checkout" name="proceed"
-                                                   class="checkout-button button alt wc-forward">
+                                            <input type="submit" value="Checkout" name="proceed" data-toggle="modal"
+                                                   class="myModal" data-target="#tien">
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
+{{--                            </form>--}}
+                            <form action="{{ route('orders.store') }}" method="post">
+                                @csrf
+                                <div class="">
+                                    <div class="modal" id="tien" tabindex="-1">
+                                        <div class="modal-dialog" style="width: 840px;
+    margin: 67px auto;">
+                                            <div class="modal-content" style="width: 900px; height: 500px">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title"><strong> Information shipping</strong></h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-2">
+                                                            <div>
+                                                                <h2>
+                                                                    <label for="">
+                                                                        <img src="{{ asset('img/id-card-solid.svg') }}"
+                                                                             style="width: 40px; height: 40px" alt="">
+                                                                    </label>
+                                                                    Information
+                                                                </h2>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="exampleInputEmail1">Full Name</label>
+                                                                <input type="text" name="name" class="form-control">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="exampleInputEmail1">Phone Number</label>
+                                                                <input type="text" name="phone" class="form-control">
+                                                            </div>
+                                                            <div class="md-form col-4">
+                                                                <label for="exampleInputEmail1">Province</label>
+                                                                <select class="form-control" name="province"
+                                                                        id="province">
+                                                                </select>
+                                                            </div>
+                                                            <div class="md-form col-4">
+                                                                <label for="exampleInputEmail1">District</label>
+                                                                <select class="form-control" name="district"
+                                                                        id="district">
+                                                                    <option value="">Quận/Huyện</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="md-form col-4">
+                                                                <label for="exampleInputEmail1">Ward</label>
+
+                                                                <select class="form-control" name="ward" id="ward">
+                                                                    <option value="">Phường/Xã</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-10" style="margin-left: 50%">
+                                                            <div>
+                                                                <h2>
+                                                                    <label for="">
+                                                                        <i class="fa fa-credit-card fa-lg section__title--icon hide-on-desktop"></i>
+                                                                    </label>
+                                                                    Payment
+                                                                </h2>
+                                                            </div>
+                                                            <div class="accordion" id="accordionExample">
+                                                                <div class="card">
+                                                                    <div class="card-header" id="headingOne">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="checkbox"
+                                                                                   name="exampleRadios"
+                                                                                   id="exampleRadios1" value="option1"
+                                                                                   checked>
+                                                                            <label class="form-check-label"
+                                                                                   for="exampleRadios1">
+                                                                                Thanh toán khi giao hàng (COD) </label>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div id="collapseOne" class="collapse show"
+                                                                         aria-labelledby="headingOne"
+                                                                         data-parent="#accordionExample">
+                                                                        <div class="card-body">
+                                                                            Thanh toán khi nhân hàng
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card" >
+                                                                    <div class="card-header" id="headingOne">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="checkbox"
+                                                                                   name="example"
+                                                                                   id="exampleRadios2" value="option1"
+                                                                                   >
+                                                                            <label class="form-check-label"
+                                                                                   for="exampleRadios2">
+                                                                                Chuyển khoản qua ngân hàng </label>
+                                                                            <span><i
+                                                                                    class="payment-icon payment-icon--3"></i></span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div id="collapseOne" class="collapse show"
+                                                                         aria-labelledby="headingOne"
+                                                                         data-parent="#accordionExample">
+                                                                        <div class="card-body">
+                                                                            Vui lòng shi lại MÃ ĐƠN HÀNG và SỐ ĐIỆN
+                                                                            THOẠI <br> của bạn vào mục Nội dung thanh toán.
+                                                                            Đơn hàng sẽ đươc giao sau khi tiền đã được
+                                                                            chuyển.<br>
+                                                                            Thông tin tài khoản:
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Close
+                                                        </button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
                             <form action="{{ route('send.email') }}" method="post">
                                 @csrf
@@ -167,7 +297,7 @@
                                             <tr>
                                                 <td><input style="width: 80%" type="email" name="email"
                                                            placeholder="Email của bạn">
-                                                    <button type="submit">Đăng ký</button>
+                                                    <button class="send-mail" type="submit">Đăng ký</button>
                                                 </td>
                                             </tr>
                                             </tbody>

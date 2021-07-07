@@ -13,6 +13,7 @@ class ChangeProductIdToNullableInImagesTable extends Migration
      */
     public function up()
     {
+//        Schema::dropIfExists('images');
         Schema::table('images', function (Blueprint $table) {
             $table->unsignedBigInteger('product_id')->nullable()->change();
         });
@@ -26,7 +27,6 @@ class ChangeProductIdToNullableInImagesTable extends Migration
     public function down()
     {
         Schema::table('images', function (Blueprint $table) {
-            //
         });
     }
 }

@@ -13,6 +13,7 @@ class ChangeBrandToNullableInProductsTable extends Migration
      */
     public function up()
     {
+//        Schema::dropIfExists('products');
         Schema::table('products', function (Blueprint $table) {
             $table->unsignedBigInteger('brand_id')->nullable()->change();
             $table->unsignedBigInteger('category_id')->nullable()->change();
@@ -26,10 +27,8 @@ class ChangeBrandToNullableInProductsTable extends Migration
      */
     public function down()
     {
-
         Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('brand_id');
-            $table->dropColumn('category_id');
+
         });
     }
 }
