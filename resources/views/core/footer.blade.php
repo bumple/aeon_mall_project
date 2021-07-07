@@ -143,8 +143,6 @@
     @endif
 </script>
 
-// AjAX - Cart
-
 <script>
     let origin = window.origin;
 

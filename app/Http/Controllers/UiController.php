@@ -61,7 +61,6 @@ class UiController extends Controller
             $products = Product::with('images', 'category', 'brand')->get();
             $categories = Category::all();
             $brands = Brand::all();
-            dd($product1);
             $relate_brand_products = $this->list_relationship_brand_products($id);
 
             return view('user.single-product', compact('product1', 'relate_brand_products', 'brands', 'user', 'products', 'categories'));

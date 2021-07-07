@@ -30,6 +30,7 @@
                             @if($key>4)
                                 @break
                             @endif
+
                             <div class="thubmnail-recent">
                                 @forelse($product->images as $image)
                                     <img src="{{asset("storage/uploads/$product->id/$image->image")}}"
@@ -63,7 +64,7 @@
                 <div class="col-md-8">
                     <div class="product-content-right">
                         <div class="woocommerce ">
-                            <form method="post" action="{{ route('orders.store') }}">
+{{--                            <form method="post" action="{{ route('orders.store') }}">--}}
                                 @csrf
                                 <table cellspacing="0" class="shop_table cart">
                                     <thead>
@@ -77,57 +78,59 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @forelse($products as $product)
-                                        <tr class="cart-item-{{ $product['item']['id'] }}">
-                                            <td class="product-remove">
-                                                <a title="Remove this item" class="remove"
-                                                   href="{{ route('product.deleteCart', $product['item']['id']) }}">×</a>
-                                            </td>
+                                    @if(!is_null($items))
+                                        @forelse($items as $item)
+                                            <tr class="cart_item">
+                                                <td class="product-remove">
+                                                    <a title="Remove this item" class="remove"
+                                                       href="{{ route('product.deleteCart', $item['item']['id']) }}">×</a>
+                                                </td>
+                                                <td class="product-thumbnail">
+                                                    @forelse($item['image'] as $image)
+                                                        <a href="{{ route('product.detail', $image->product_id) }}">
+                                                            <img width="145" height="145" alt="" class="shop_thumbnail"
+                                                                 src="{{ asset("storage/uploads/$image->product_id/$image->image")  }}"></a>
+                                                        @break
+                                                    @empty
+                                                        <p>Not data</p>
+                                                    @endforelse
+                                                </td>
 
-                                            <td class="product-thumbnail">
-                                                @forelse($product['image'] as $image)
-                                                    <a href="{{ route('product.detail', $image->product_id) }}">
-                                                        <img width="145" height="145" alt="" class="shop_thumbnail"
-                                                             src="{{ asset("storage/uploads/$image->product_id/$image->image")  }}"></a>
-                                                    @break
-                                                @empty
-                                                    <p>Not data</p>
-                                                @endforelse
-                                            </td>
+                                                <td class="product-name">
+                                                    <a href="single-product.blade.php">{{ $item['item']['product_name'] }}</a>
+                                                </td>
 
-                                            <td class="product-name">
-                                                <a href="single-product.blade.php">{{ $product['item']['product_name'] }}</a>
-                                            </td>
+                                                <td class="product-price">
+                                                    <span class="amount">{{ $item['item']['unit_price'] }}</span>
+                                                </td>
 
-                                            <td class="product-price">
-                                                <span class="amount" >{{ $product['item']['unit_price'] }}</span>
-                                            </td>
+                                                <td class="product-quantity">
+                                                    <div class="quantity buttons_added">
+                                                        <input href="javascript:"
+                                                               onclick="reduce({{ $item['item']['id'] }});"
+                                                               type="button"
+                                                               class="minus" value="-">
+                                                        <input type="number" size="4"
+                                                               class="quantity-item-{{ $item['item']['id'] }}"
+                                                               title="Qty" value="{{ $item ['quantity'] }}">
+                                                        <input href="javascript:" type="button"
+                                                               onclick="increase({{ $item['item']['id'] }});"
+                                                               class="plus" value="+">
+                                                    </div>
+                                                </td>
 
-                                            <td class="product-quantity">
-                                                <div class="quantity buttons_added">
-                                                    <input href="javascript:"
-                                                           onclick="reduce({{ $product['item']['id'] }});" type="button"
-                                                           class="minus" value="-">
-                                                    <input type="number" size="4"
-                                                           class="quantity-item-{{ $product['item']['id'] }}"
-                                                           title="Qty" value="{{ $product['quantity'] }}">
-                                                    <input href="javascript:" type="button"
-                                                           onclick="increase({{ $product['item']['id'] }});"
-                                                           class="plus" value="+">
-                                                </div>
-                                            </td>
-
-                                            <td class="product-subtotal">
+                                                <td class="product-subtotal">
                                                 <span
-                                                    class="total-price-{{ $product['item']['id'] }}"
-                                                    id="amount">{{ $product['price'] * $product['quantity'] }}</span>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td>Not data</td>
-                                        </tr>
-                                    @endforelse
+                                                    class="total-price-{{ $item['item']['id'] }}"
+                                                    id="amount">{{ $item['price'] * $item['quantity'] }}</span>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td>Not data</td>
+                                            </tr>
+                                        @endforelse
+                                    @endif
                                     <tr>
                                         <th colspan="4">
                                             <p>Total</p>
@@ -153,8 +156,9 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                            </form>
-                            <form action="" method="post">
+{{--                            </form>--}}
+                            <form action="{{ route('orders.store') }}" method="post">
+                                @csrf
                                 <div class="">
                                     <div class="modal" id="tien" tabindex="-1">
                                         <div class="modal-dialog" style="width: 840px;
@@ -181,30 +185,34 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="exampleInputEmail1">Full Name</label>
-                                                                <input type="text" class="form-control">
+                                                                <input type="text" name="name" class="form-control">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="exampleInputEmail1">Phone Number</label>
-                                                                <input type="text" class="form-control">
+                                                                <input type="text" name="phone" class="form-control">
                                                             </div>
                                                             <div class="md-form col-4">
+                                                                <label for="exampleInputEmail1">Province</label>
                                                                 <select class="form-control" name="province"
                                                                         id="province">
                                                                 </select>
                                                             </div>
                                                             <div class="md-form col-4">
+                                                                <label for="exampleInputEmail1">District</label>
                                                                 <select class="form-control" name="district"
                                                                         id="district">
                                                                     <option value="">Quận/Huyện</option>
                                                                 </select>
                                                             </div>
                                                             <div class="md-form col-4">
+                                                                <label for="exampleInputEmail1">Ward</label>
+
                                                                 <select class="form-control" name="ward" id="ward">
                                                                     <option value="">Phường/Xã</option>
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div class="col-10">
+                                                        <div class="col-10" style="margin-left: 50%">
                                                             <div>
                                                                 <h2>
                                                                     <label for="">
@@ -217,7 +225,7 @@
                                                                 <div class="card">
                                                                     <div class="card-header" id="headingOne">
                                                                         <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
+                                                                            <input class="form-check-input" type="checkbox"
                                                                                    name="exampleRadios"
                                                                                    id="exampleRadios1" value="option1"
                                                                                    checked>
@@ -235,15 +243,15 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="card">
+                                                                <div class="card" >
                                                                     <div class="card-header" id="headingOne">
                                                                         <div class="form-check">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                   name="exampleRadios"
-                                                                                   id="exampleRadios1" value="option1"
-                                                                                   checked>
+                                                                            <input class="form-check-input" type="checkbox"
+                                                                                   name="example"
+                                                                                   id="exampleRadios2" value="option1"
+                                                                                   >
                                                                             <label class="form-check-label"
-                                                                                   for="exampleRadios1">
+                                                                                   for="exampleRadios2">
                                                                                 Chuyển khoản qua ngân hàng </label>
                                                                             <span><i
                                                                                     class="payment-icon payment-icon--3"></i></span>
@@ -255,10 +263,9 @@
                                                                          data-parent="#accordionExample">
                                                                         <div class="card-body">
                                                                             Vui lòng shi lại MÃ ĐƠN HÀNG và SỐ ĐIỆN
-                                                                            THOẠI của bạn vào mục Nội dung thanh toán.
+                                                                            THOẠI <br> của bạn vào mục Nội dung thanh toán.
                                                                             Đơn hàng sẽ đươc giao sau khi tiền đã được
-                                                                            chuyển.
-
+                                                                            chuyển.<br>
                                                                             Thông tin tài khoản:
                                                                         </div>
                                                                     </div>
@@ -266,13 +273,14 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Close
+                                                        </button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">Close
-                                                    </button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
