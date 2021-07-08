@@ -17,7 +17,10 @@ class UiController extends Controller
             $users = User::where('email', Session::get('email_user'))->get();
             $user = $users[0];
             $products = Product::with('category', 'brand', 'images')->get();
-            return view('user.cart', compact('user', 'products'));
+            $brands = Brand::with('products')->get();
+            $categories = Category::with('products')->get();
+
+            return view('user.cart', compact('user', 'products','brands','categories'));
         }
         $products = Product::with('category', 'brand', 'images')->get();
         return view('user.cart', compact('products'));
@@ -29,12 +32,17 @@ class UiController extends Controller
             $users = User::where('email', Session::get('email_user'))->get();
             $user = $users[0];
             $products = Product::with('category', 'brand', 'images')->get();
+            $categories = Category::with('products')->get();
+            $brands = Brand::with('products')->get();
 
-            return view('user.shop', compact('user', 'products'));
+            return view('user.shop', compact('user', 'products','categories','brands'));
         }
         $products = Product::with('category', 'brand', 'images')->get();
+        $categories = Category::with('products')->get();
+        $brands = Brand::with('products')->get();
 
-        return view('user.shop', compact('products'));
+
+        return view('user.shop', compact('products','categories','brands'));
     }
 
     public function index()
@@ -43,10 +51,14 @@ class UiController extends Controller
             $users = User::where('email', Session::get('email_user'))->get();
             $user = $users[0];
             $products = Product::with('category', 'brand', 'images')->get();
-            return view('user.index', compact('user', 'products'));
+            $categories = Category::with('products')->get();
+            $brands = Brand::with('products')->get();
+            return view('user.index', compact('user', 'products','categories','brands'));
         }
         $products = Product::with('category', 'brand', 'images')->get();
-        return view('user.index', compact('products'));
+        $categories = Category::all();
+        $brands = Brand::all();
+        return view('user.index', compact('products','categories','brands'));
     }
 
     public function detail($id)
@@ -89,8 +101,8 @@ class UiController extends Controller
         return Product::with('images', 'category', 'brand')->where('category_id', $category_id)->get();
     }
 
-    public function getSearch(Request $request)
-    {
+    public function getSearch(Request $request,$category_id){
+        $product = Product::where('category_id', $category_id)->get();
         return view('user.searchajax');
     }
 
