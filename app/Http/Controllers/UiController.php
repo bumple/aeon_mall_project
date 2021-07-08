@@ -41,12 +41,12 @@ class UiController extends Controller
         $categories = Category::with('products')->get();
         $brands = Brand::with('products')->get();
 
-
         return view('user.shop', compact('products', 'categories', 'brands'));
     }
 
     public function index()
     {
+
         if (Session::has('email_user')) {
             $users = User::where('email', Session::get('email_user'))->get();
             $user = $users[0];
@@ -139,6 +139,4 @@ class UiController extends Controller
         $brandOrcategory = $brandOrcategory->category->name;
         return view('user.shop_brand_category', compact('user', 'brandOrcategory', 'product_brand_category', 'products', 'categories', 'brands'));
     }
-
-
 }
