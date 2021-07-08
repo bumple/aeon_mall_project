@@ -9,6 +9,7 @@ use App\Http\Controllers\ImageController;
 
 use App\Http\Controllers\LangController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UiController;
 use App\Http\Controllers\UserController;
@@ -65,7 +66,12 @@ Route::middleware(['locale'])->prefix('/product')->group(function () {
     Route::get('/delete-cart/{id}', [CartController::class, 'deleteCart'])->name('product.deleteCart')->middleware('auth');
     Route::get('/{id}/reduce', [CartController::class, 'reduceByOne'])->name('product.reduceByOne')->middleware('auth');
     Route::get('{id}/increase', [CartController::class, 'increaseByOne'])->name('product.increaseByOne')->middleware('auth');
+<<<<<<< HEAD
 //    Route::get('')
+=======
+
+    Route::resource('orders', OrderController::class);
+>>>>>>> 9c0491a6e0e1fc6b9c275fc49add3dc997c3a1ba
 });
 
 Route::prefix('user')->group(function () {

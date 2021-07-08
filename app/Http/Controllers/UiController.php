@@ -103,11 +103,12 @@ class UiController extends Controller
 
     public function getSearch(Request $request,$category_id){
         $product = Product::where('category_id', $category_id)->get();
-
         return view('user.searchajax');
     }
 
-    public function getSearchAjax(){
+    public function getSearchAjax()
+    {
+        dd(1);
 
     }
 

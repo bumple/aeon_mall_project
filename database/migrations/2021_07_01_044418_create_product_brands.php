@@ -13,6 +13,8 @@ class CreateProductBrands extends Migration
      */
     public function up()
     {
+//        Schema::dropIfExists('brands');
+
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
             $table->string('name');
