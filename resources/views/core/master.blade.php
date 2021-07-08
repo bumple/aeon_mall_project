@@ -18,7 +18,6 @@
         </div>
     </div>
 </div> <!-- End site branding area -->
-
 <div class="mainmenu-area">
     <div class="container">
         <div class="row">
@@ -36,8 +35,35 @@
                     <li><a href="{{route('product.shop')}}">@lang('message.shop_page')</a></li>
                     <li><a href="{{route('product.detail',6)}}">@lang('message.single_product')</a></li>
                     <li><a href="{{route('product.cart')}}">@lang('message.cart')</a></li>
-                    <li><a href="checkout.html">@lang('message.check_out')</a></li>
-                    <li><a href="#">@lang('message.category')</a></li>
+                    <li>
+                        <div class="dropdown">
+                            <button class="dropbtn">CATEGORY</button>
+                            <div class="dropdown-content">
+                                <ul class="list-group">
+                                    @foreach($categories as $category)
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{$category->name}}
+                                        <span class="badge badge-primary badge-pill">{{count($category->products)}}</span>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <button class="dropbtn">BRANDS</button>
+                            <div class="dropdown-content">
+                                <ul class="list-group">
+                                    @foreach($brands as $brand)
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span><a id="someselector" style="color: black;width: 100%"  href="">{{$brand->name}}</a></span>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
                     <li><a href="#">@lang('message.others')</a></li>
                     <li><a href="#">@lang('message.contact')</a></li>
                 </ul>

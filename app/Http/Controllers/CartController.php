@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -38,6 +40,8 @@ class CartController extends Controller
             $users = User::where('email', Session::get('email_user'))->get();
             $user = $users[0];
             $products = Product::with('category', 'brand', 'images')->get();
+            $categories = Category::with('products')->get();
+            $brands = Brand::with('products')->get();
 
             $user_id = Auth::id();
 
@@ -52,7 +56,9 @@ class CartController extends Controller
                 'totalPrice' => $cart->totalPrice,
                 'totalQuantity' => $cart->totalQuantity,
                 'cart' => $cart,
-                'products' => $products
+                'products' => $products,
+                'categories' => $categories,
+                'brands' => $brands
             ])->with('user', $user);
         }
 
