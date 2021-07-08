@@ -105,7 +105,7 @@
                                 <h2><a href="{{route('product.detail',$product->id)}}">{{$product->product_name}}</a></h2>
 
                                 <div class="product-carousel-price">
-                                    <ins>{{$product->unit_price}}</ins>
+                                    <ins>{{number_format($product->unit_price)." VNĐ"}}</ins>
                                 </div>
                             </div>
                             @endforeach

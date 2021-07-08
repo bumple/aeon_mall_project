@@ -11,7 +11,7 @@
 
             <div class="col-sm-6">
                 <div class="shopping-item">
-                    <a href="{{route('product.cart')}}">My Cart: <span class="cart-amount">{{ \Illuminate\Support\Facades\Session::has(\Illuminate\Support\Facades\Auth::id().'cart') ? \Illuminate\Support\Facades\Session::get(\Illuminate\Support\Facades\Auth::id().'cart')->totalPrice : '' }}</span> <i class="fa fa-shopping-cart"></i>
+                    <a href="{{route('product.cart')}}">My Cart: <span class="cart-amount">{{ \Illuminate\Support\Facades\Session::has(\Illuminate\Support\Facades\Auth::id().'cart') ? number_format(\Illuminate\Support\Facades\Session::get(\Illuminate\Support\Facades\Auth::id().'cart')->totalPrice) : '' }}</span>&#8363 <i class="fa fa-shopping-cart"></i>
                         <span class="product-count">{{ \Illuminate\Support\Facades\Session::has(\Illuminate\Support\Facades\Auth::id().'cart') ? \Illuminate\Support\Facades\Session::get(\Illuminate\Support\Facades\Auth::id().'cart')->totalQuantity : '' }}</span></a>
                 </div>
             </div>
@@ -37,16 +37,13 @@
                     <li><a href="{{route('product.cart')}}">@lang('message.cart')</a></li>
                     <li>
                         <div class="dropdown">
-                            <button class="dropbtn">CATEGORY</button>
+                            <button class="dropbtn">CATEGORIES</button>
                             <div class="dropdown-content">
-                                <ul class="list-group">
+                                <div class="list-group">
                                     @foreach($categories as $category)
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    {{$category->name}}
-                                        <span class="badge badge-primary badge-pill">{{count($category->products)}}</span>
-                                    </li>
+                                        <a href="{{route('product.category',$category->id)}}" class="list-group-item list-group-item-action">{{$category->name}}</a>
                                     @endforeach
-                                </ul>
+                                </div>
                             </div>
                         </div>
                     </li>
@@ -54,13 +51,11 @@
                         <div class="dropdown">
                             <button class="dropbtn">BRANDS</button>
                             <div class="dropdown-content">
-                                <ul class="list-group">
+                                <div class="list-group">
                                     @foreach($brands as $brand)
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <span><a id="someselector" style="color: black;width: 100%"  href="">{{$brand->name}}</a></span>
-                                    </li>
+                                    <a href="{{route('product.brand',$brand->id)}}" class="list-group-item list-group-item-action">{{$brand->name}}</a>
                                     @endforeach
-                                </ul>
+                                </div>
                             </div>
                         </div>
                     </li>

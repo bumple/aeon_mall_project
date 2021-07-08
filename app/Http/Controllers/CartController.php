@@ -64,9 +64,9 @@ class CartController extends Controller
                 'totalQuantity' => $cart->totalQuantity,
                 'cart' => $cart,
                 'products' => $products,
-                'check_info' => $check_info
+                'check_info' => $check_info,
                 'categories' => $categories,
-                'brands' => $brands
+                'brands' => $brands,
 
             ])->with('user', $user);
 

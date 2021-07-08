@@ -42,7 +42,7 @@
                                 <h2><a href="{{route('product.detail',$product->id)}}">{{$product->product_name}}</a>
                                 </h2>
                                 <div class="product-sidebar-price">
-                                    <ins>{{$product->unit_price." VNĐ"}}</ins>
+                                    <ins>{{number_format($product->unit_price)." VNĐ"}}</ins>
                                 </div>
                             </div>
 

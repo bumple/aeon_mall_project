@@ -60,6 +60,9 @@ Route::middleware(['locale'])->prefix('/product')->group(function () {
 
     Route::get('/search',[UiController::class,'getSearch'])->name('product.search');
     Route::post('/search/name',[UiController::class,'getSearchAjax'])->name('product.search');
+    Route::get('/{brand_id}/shop-page/brand',[UiController::class,'list_product_brand'])->name('product.brand');
+    Route::get('/{category_id}/shop-page/category',[UiController::class,'list_product_category'])->name('product.category');
+
 
     Route::get('/add-cart/{id}', [CartController::class, 'addToCart'])->name('product.addToCart')->middleware('auth');
     Route::get('/show-cart', [CartController::class, 'showCart'])->name('product.cart')->middleware('auth');
