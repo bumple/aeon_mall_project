@@ -150,8 +150,18 @@
                                         <td class="actions" colspan="6">
                                             <input type="submit" value="Continue Shopping" name="update_cart"
                                                    class="button">
-                                            <input type="submit" value="Checkout" name="proceed" data-toggle="modal"
-                                                   class="myModal" data-target="#tien">
+                                            @if($check_info)
+                                                <div class="col-2">
+                                                <form action="{{ route('orders.index') }}" method="get">
+                                                    @csrf
+                                            <input type="submit" value="Checkout" name="proceed" >
+
+                                                </form>
+                                                </div>
+                                            @else
+                                                <input type="submit" value="Checkout" name="proceed" data-toggle="modal"
+                                                       class="myModal" data-target="#tien">
+                                            @endif
                                         </td>
                                     </tr>
                                     </tbody>

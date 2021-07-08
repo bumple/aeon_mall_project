@@ -24,8 +24,8 @@ class OrderController extends Controller
         $user = $users[0];
         $products = Product::with('category', 'brand', 'images', 'orders')->get();
         $product = $products[0];
-        dd($user);
-        dd($product->orders);
+//        dd($user);
+//        dd($product->orders);
         return view('order.index', compact('user'))->with('product', $product);
     }
 
@@ -36,7 +36,6 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-
         try {
             $user_id = Auth::id();
             if (Session::has($user_id . 'cart')) {
@@ -64,11 +63,6 @@ class OrderController extends Controller
                     'ward' => 'required',
                 ]);
 
-                $check_info = User::find(2)->info;
-                if ($check_info) {
-                    // send email
-                    return redirect()->route('orders.index');
-                }
                 $info = new Info();
                 $info->user_id = $user_id;
                 $info->phone = $request->phone;
@@ -114,4 +108,6 @@ class OrderController extends Controller
     {
         //
     }
+
+
 }
