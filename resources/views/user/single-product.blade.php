@@ -64,9 +64,9 @@
                 <div class="col-md-8">
                     <div class="product-content-right">
                         <div class="product-breadcroumb">
-                            <a href="">Home</a>
-                            <a href="">Category Name</a>
-                            <a href="">Sony Smart TV - 2015</a>
+                            <a href="{{route('product.index')}}">Home</a>
+                            <a href="">{{$product1->brand->name}}</a>
+                            <a href="">{{$product1->product_name}}</a>
                         </div>
 
                         <div class="row">
@@ -101,7 +101,7 @@
                                 <div class="product-inner">
                                     <h2 class="product-name">{{$product1->product_name}}</h2>
                                     <div class="product-inner-price">
-                                        <ins>{{$product1->unit_price." VNĐ"}}</ins>
+                                        <ins>{{number_format($product1->unit_price)." VNĐ"}}</ins>
                                     </div>
 
                                     <form action="{{ route('product.addToCart', $product->id) }}" class="cart">

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Mail\UserRegisteredMail;
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Info;
 use App\Models\Order;
 use App\Models\OrderProduct;
@@ -24,9 +26,11 @@ class OrderController extends Controller
         $user = $users[0];
         $products = Product::with('category', 'brand', 'images', 'orders')->get();
         $product = $products[0];
+        $brands = Brand::all();
+        $categories = Category::all();
 //        dd($user);
 //        dd($product->orders);
-        return view('order.index', compact('user'))->with('product', $product);
+        return view('order.index', compact('user','brands','categories'))->with('product', $product);
     }
 
     public function create()
