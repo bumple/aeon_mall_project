@@ -53,8 +53,8 @@ class UserController extends Controller
     }
 
     public function logout(){
-        Auth::logout();
         Session::forget('email_user');
+        Auth::logout();
         return redirect()->route('product.index');
     }
 

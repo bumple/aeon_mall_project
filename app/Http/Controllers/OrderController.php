@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Mail\UserRegisteredMail;
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Info;
 use App\Models\Order;
 use App\Models\OrderProduct;
@@ -24,9 +26,17 @@ class OrderController extends Controller
         $user = $users[0];
         $products = Product::with('category', 'brand', 'images', 'orders')->get();
         $product = $products[0];
-//        dd($user);
-//        dd($product->orders);
-        return view('order.index', compact('user'))->with('product', $product);
+        $brands = Brand::all();
+        $categories = Category::all();
+
+        $info_carts = \session()->get(Auth::id() . 'cart');
+//        dd($info_carts->totalPrice);
+//        $items = $info_customers['items'];
+        $info_customers = Info::where('user_id', Auth::id())->first();
+//        $order_id =
+//        dd(\session()->get(Auth::id() . 'info_cart'));
+        return view('order.index',
+            compact('user', 'brands', 'categories', 'info_carts', 'info_customers'))->with('product', $product);
     }
 
     public function create()
@@ -78,6 +88,24 @@ class OrderController extends Controller
             ];
             $email_user = Auth::user()->email;
             Mail::to($email_user)->send(new UserRegisteredMail($details));
+            $info_customer = [
+                'name' => Auth::user()->name,
+                'phone' => $request->phone,
+                'province' => $request->province,
+                'district' => $request->district,
+                'ward' => $request->ward,
+                'items' => $order_cart->items,
+                'totalQuantity' => $order_cart->totalQuantity,
+                'totalPrice' => $order_cart->totalPrice,
+            ];
+            \session()->put($user_id . 'info_cart', $info_customer);
+//            dd(session()->get($user_id . 'info_cart'));
+
+            $info_carts = \session()->get(Auth::id() . 'info_cart');
+            $info_customers = Info::where('user_id', Auth::id())->first();
+
+            return redirect()->route('orders.index',
+                compact('info_carts','info_customers'));
 
             session()->forget($user_id . 'cart');
             DB::commit();
@@ -85,8 +113,10 @@ class OrderController extends Controller
             DB::rollBack();
             echo $e->getMessage();
         }
-
-        return redirect()->route('orders.index');
+        $info_carts = \session()->get(Auth::id() . 'info_cart');
+        $info_customers = Info::where('user_id', Auth::id())->first();
+        return redirect()->route('orders.index',
+            compact('info_carts','info_customers'));
     }
 
     public function show(Order $order)
@@ -101,7 +131,7 @@ class OrderController extends Controller
 
     public function update(Request $request, Order $order)
     {
-        //
+        return redirect()->route('product.index');
     }
 
     public function destroy(Order $order)

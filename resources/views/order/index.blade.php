@@ -1,6 +1,5 @@
 @extends('core.master')
 @section('content')
-
     <div class="product-big-title-area">
         <div class="container">
             <div class="row">
@@ -44,34 +43,38 @@
                                 <table class="shop_table">
                                     <thead>
                                     <tr>
-                                        <th class="product-name">No.</th>
+                                        <th class="product-name">Product name</th>
                                         <th class="product-total">Image</th>
                                         <th class="product-total">Quantity</th>
                                         <th class="product-total">Sub total</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-
-                                    @foreach($product->orders as $order)
-{{--                                        @if($order->user_id == \Illuminate\Support\Facades\Auth::id())--}}
+                                    @foreach($info_carts->items as $item)
                                     <tr class="cart_item">
                                         <td class="product-name">
-                                            Ship Your Idea <strong class="product-quantity">× 1</strong> </td>
+                                            {{ $item['item']->product_name }}
+                                        </td>
                                         <td class="product-total">
-                                            <span class="amount">£15.00</span> </td>
+                                         <img src="{{ asset("storage/uploads/".$item['image'][0]->product_id.'/'.$item['image'][0]->image) }}" alt="">
+                                        </td>
                                         <td class="product-name">
-                                            Ship Your Idea <strong class="product-quantity">× 1</strong> </td>
+                                            {{ $item['quantity'] }}
+                                        </td>
                                         <td class="product-name">
-                                            Ship Your Idea <strong class="product-quantity">× 1</strong> </td>
+                                            {{ $item['total'] }}
+                                        </td>
                                     </tr>
                                     @endforeach
                                     </tbody>
+                                    <tr>
+                                        <th class="product-total" colspan="2">Total</th>
+                                        <th class="product-total" >{{ $info_carts->totalQuantity }}</th>
+                                        <th class="product-total" >{{ $info_carts->totalPrice }}</th>
+                                    </tr>
                                 </table>
                             <form enctype="multipart/form-data" action="#" class="checkout" method="post" name="checkout">
-
-
                                 <h3 id="order_review_heading">Your order is being shipped to</h3>
-
                                 <div id="order_review" style="position: relative;">
                                     <table class="shop_table">
                                         <thead>
@@ -83,13 +86,51 @@
                                         <tbody>
                                         <tr class="cart_item">
                                             <td class="product-name">
-                                                Ship Your Idea <strong class="product-quantity">× 1</strong> </td>
+                                            Customer name
+                                            </td>
                                             <td class="product-total">
-                                                <span class="amount">£15.00</span> </td>
+                                            {{ \Illuminate\Support\Facades\Auth::user()->name }}
+                                            </td>
+                                        </tr>
+                                        <tr class="cart_item">
+                                            <td class="product-name">
+                                                Customer phone
+                                            </td>
+                                            <td class="product-total">
+                                                {{ $info_customers->phone }}
+                                            </td>
+                                        </tr>
+                                        <tr class="cart_item">
+                                            <td class="product-name">
+                                                Province
+                                            </td>
+                                            <td class="product-total">
+                                                {{ $info_customers->province }}
+                                            </td>
+                                        </tr>
+                                        <tr class="cart_item">
+                                            <td class="product-name">
+                                                District
+                                            </td>
+                                            <td class="product-total">
+                                                {{ $info_customers->district }}
+                                            </td>
+                                        </tr>
+                                        <tr class="cart_item">
+                                            <td class="product-name">
+                                                Ward
+                                            </td>
+                                            <td class="product-total">
+                                                {{ $info_customers->ward }}
+                                            </td>
                                         </tr>
                                         </tbody>
                                     </table>
-
+                                    <div class="form-row place-order" style="float: right">
+{{--                                        <form action="{{ route('orders.update', 1) }}">--}}
+                                        <input type="submit" data-value="Place order" value="Payment now" id="place_order" name="woocommerce_checkout_place_order" class="button alt">
+{{--                                        </form>--}}
+                                    </div>
                                     <div id="payment">
                                         <ul class="payment_methods methods">
                                             <li class="payment_method_bacs">
@@ -115,14 +156,6 @@
                                                 </div>
                                             </li>
                                         </ul>
-
-                                        <div class="form-row place-order">
-
-                                            <input type="submit" data-value="Place order" value="Place order" id="place_order" name="woocommerce_checkout_place_order" class="button alt">
-
-
-                                        </div>
-
                                         <div class="clear"></div>
 
                                     </div>

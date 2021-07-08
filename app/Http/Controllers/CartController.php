@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use App\Mail\UserRegisteredMail;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
@@ -36,7 +38,6 @@ class CartController extends Controller
 
     public function showCart(Request $request)
     {
-
         if (Session::has('email_user')) {
             $users = User::where('email', Session::get('email_user'))->get();
             $user = $users[0];
@@ -53,10 +54,15 @@ class CartController extends Controller
             $items = $cart->items;
 
             $check_info = User::find($user_id)->info;
-//            if ($check_info) {
-//                // send email
-//                return redirect()->route('orders.index');
-//            }
+
+            if ($check_info) {
+                $details = [
+                    'title' => 'Cảm ơn bạn đã đặt hàng từ Boutique Brothers, chúng tôi sẽ giao hàng cho bạn sớm nhất có thể. Chúc bạn một ngày may mắn, cảm ơn vì đã kiên nhẫn đọc đến dòng này ahihi',
+                    'url' => 'https://www.Codegym.vn'
+                ];
+                $email_user = Auth::user()->email;
+                Mail::to($email_user)->send(new UserRegisteredMail($details));
+            }
 
             return view('user.cart', [
                 'items' => $cart->items,
@@ -74,8 +80,6 @@ class CartController extends Controller
         $users = User::where('email', Session::get('email_user'))->get();
         $user = $users[0];
         $products = Product::with('category', 'brand', 'images')->get();
-
-
 
         return redirect()->route('product.index', compact('user'))->with('products', $products);
     }
