@@ -52,6 +52,11 @@ class CartController extends Controller
 
             $items = $cart->items;
 
+            $check_info = User::find($user_id)->info;
+//            if ($check_info) {
+//                // send email
+//                return redirect()->route('orders.index');
+//            }
 
             return view('user.cart', [
                 'items' => $cart->items,
@@ -59,14 +64,19 @@ class CartController extends Controller
                 'totalQuantity' => $cart->totalQuantity,
                 'cart' => $cart,
                 'products' => $products,
+                'check_info' => $check_info
                 'categories' => $categories,
                 'brands' => $brands
+
             ])->with('user', $user);
+
         }
 
         $users = User::where('email', Session::get('email_user'))->get();
         $user = $users[0];
         $products = Product::with('category', 'brand', 'images')->get();
+
+
 
         return redirect()->route('product.index', compact('user'))->with('products', $products);
     }
