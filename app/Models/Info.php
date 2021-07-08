@@ -11,10 +11,6 @@ class Info extends Model
 
     protected $table = 'info';
 
-//    protected $fillable = [
-//        ''
-//    ];
-
     public function user()
     {
         return $this->belongsTo(User::class);
