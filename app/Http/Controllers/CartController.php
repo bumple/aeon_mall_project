@@ -72,7 +72,7 @@ class CartController extends Controller
                 'products' => $products,
                 'check_info' => $check_info,
                 'categories' => $categories,
-                'brands' => $brands
+                'brands' => $brands,
             ])->with('user', $user);
 
         }

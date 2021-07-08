@@ -33,8 +33,7 @@ class OrderController extends Controller
 //        dd($info_carts->totalPrice);
 //        $items = $info_customers['items'];
         $info_customers = Info::where('user_id', Auth::id())->first();
-//        $order_id =
-//        dd(\session()->get(Auth::id() . 'info_cart'));
+
         return view('order.index',
             compact('user', 'brands', 'categories', 'info_carts', 'info_customers'))->with('product', $product);
     }

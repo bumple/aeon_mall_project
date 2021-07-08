@@ -20,7 +20,7 @@ class UiController extends Controller
             $brands = Brand::with('products')->get();
             $categories = Category::with('products')->get();
 
-            return view('user.cart', compact('user', 'products','brands','categories'));
+            return view('user.cart', compact('user', 'products', 'brands', 'categories'));
         }
         $products = Product::with('category', 'brand', 'images')->get();
         return view('user.cart', compact('products'));
@@ -35,13 +35,13 @@ class UiController extends Controller
             $categories = Category::with('products')->get();
             $brands = Brand::with('products')->get();
 
-            return view('user.shop', compact('user', 'products','categories','brands'));
+            return view('user.shop', compact('user', 'products', 'categories', 'brands'));
         }
         $products = Product::with('category', 'brand', 'images')->get();
         $categories = Category::with('products')->get();
         $brands = Brand::with('products')->get();
 
-        return view('user.shop', compact('products','categories','brands'));
+        return view('user.shop', compact('products', 'categories', 'brands'));
     }
 
     public function index()
@@ -53,12 +53,12 @@ class UiController extends Controller
             $products = Product::with('category', 'brand', 'images')->get();
             $categories = Category::with('products')->get();
             $brands = Brand::with('products')->get();
-            return view('user.index', compact('user', 'products','categories','brands'));
+            return view('user.index', compact('user', 'products', 'categories', 'brands'));
         }
         $products = Product::with('category', 'brand', 'images')->get();
         $categories = Category::all();
         $brands = Brand::all();
-        return view('user.index', compact('products','categories','brands'));
+        return view('user.index', compact('products', 'categories', 'brands'));
     }
 
     public function detail($id)
@@ -101,7 +101,8 @@ class UiController extends Controller
         return Product::with('images', 'category', 'brand')->where('category_id', $category_id)->get();
     }
 
-    public function getSearch(Request $request,$category_id){
+    public function getSearch(Request $request, $category_id)
+    {
         $product = Product::where('category_id', $category_id)->get();
         return view('user.searchajax');
     }
@@ -109,8 +110,33 @@ class UiController extends Controller
     public function getSearchAjax()
     {
         dd(1);
+    }
+
+    public function list_product_brand($brand_id)
+    {
+        $product_brand_category = Product::where('brand_id', $brand_id)->get();
+        $users = User::where('email', Session::get('email_user'))->get();
+        $user = $users[0];
+        $products = Product::with('category', 'brand', 'images')->get();
+        $categories = Category::with('products')->get();
+        $brands = Brand::with('products')->get();
+        $brandOrcategory = $product_brand_category[0];
+        $brandOrcategory = $brandOrcategory->brand->name;
+
+        return view('user.shop_brand_category', compact('user', 'brandOrcategory', 'product_brand_category', 'products', 'categories', 'brands'));
 
     }
 
-
+    public function list_product_category($category_id)
+    {
+        $product_brand_category = Product::with('category', 'brand', 'images')->where('category_id', $category_id)->get();
+        $users = User::where('email', Session::get('email_user'))->get();
+        $user = $users[0];
+        $products = Product::with('category', 'brand', 'images')->get();
+        $categories = Category::with('products')->get();
+        $brands = Brand::with('products')->get();
+        $brandOrcategory = $product_brand_category[0];
+        $brandOrcategory = $brandOrcategory->category->name;
+        return view('user.shop_brand_category', compact('user', 'brandOrcategory', 'product_brand_category', 'products', 'categories', 'brands'));
+    }
 }

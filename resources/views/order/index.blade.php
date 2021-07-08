@@ -12,7 +12,6 @@
         </div>
     </div>
 
-
     <div class="single-product-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
@@ -157,11 +156,9 @@
                                             </li>
                                         </ul>
                                         <div class="clear"></div>
-
                                     </div>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>
